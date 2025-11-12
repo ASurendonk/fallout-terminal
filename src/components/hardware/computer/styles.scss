@@ -1,0 +1,45 @@
+$ns: computer;
+
+.#{$ns} {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: lightgreen;
+
+    .#{$ns}-content {
+        transform: scale(0.2);
+        transition: transform 1500ms;
+    }
+
+    &.sitting {
+        .#{$ns}-content {
+            transform: scale(1);
+        }
+    }
+
+    .#{$ns}-hardware {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        .#{$ns}-box {
+            .#{$ns}-cut-out {
+                position: absolute;
+                top: 450px;
+                bottom: 0;
+                left: -528px;
+                right: 0;
+                margin: auto;
+                transform: scale(1.45);
+                width: 1026px;
+                height: 908px;
+            }
+        }
+    }
+}
+

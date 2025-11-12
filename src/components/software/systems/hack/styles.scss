@@ -1,0 +1,159 @@
+@import "../../../../App";
+
+$ns: hack;
+$char-width: 9.5px;
+
+.#{$ns}-wrapper {
+    display: grid;
+    grid-gap: 0 (1.4*$char-width);
+    grid-template-columns: (6*$char-width) (12*$char-width) (6*$char-width) (12*$char-width) (14*$char-width);
+
+    .#{$ns}-box {
+        overflow: hidden;
+    }
+    .#{$ns}-hex_column_one {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .#{$ns}-block_one {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .#{$ns}-hex_column_two {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    .#{$ns}-block_two {
+        grid-column: 4;
+        grid-row: 2;
+    }
+    .#{$ns}-console {
+        grid-column: 5;
+        grid-row: 2;
+        display: table-cell;
+        vertical-align: bottom;
+        .#{$ns}-console-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .#{$ns}-console-history {
+                flex: 1;
+            }
+            .#{$ns}-console-input {
+                display: flex;
+                align-items: center;
+                > span {
+
+                }
+                > input {
+                    width: 100%;
+                    background-color: transparent;
+                    text-align: left;
+                    font-family: $share-tech;
+                    font-size: 18px;
+                    line-height: 20px;
+                    border: none;
+                    outline: none;
+                    caret-color: $color-highlight;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .#{$ns}-history_records {
+    }
+    .#{$ns}-history_record_row {
+        height: 20px;
+        white-space: nowrap;
+    }
+    .#{$ns}-history_record_row:before {
+        content: '>';
+        left: 1px;
+    }
+
+    .#{$ns}-hex-char {
+        width: $char-width;
+        height: 20px;
+        display: inline-block;
+    }
+
+    .#{$ns}-char {
+        width: $char-width;
+        height: 20px;
+        display: inline-block;
+        &:hover {
+            //@include arpp-bg-color-highlight();
+            background: $color-highlight;
+            -webkit-text-fill-color: $color;
+            transition: none;
+        }
+    }
+    .#{$ns}-hover {
+        //@include arpp-bg-color-highlight();
+        background: $color-highlight;
+        -webkit-text-fill-color: $color;
+        transition: none;
+    }
+
+    .#{$ns}-hex_column_one {
+        animation: __load-in1 3s steps(16);
+    }
+    .#{$ns}-block_one {
+        animation: __load-in2 3s steps(16);
+    }
+    .#{$ns}-hex_column_two {
+        animation: __load-in3 3s steps(16);
+    }
+    .#{$ns}-block_two {
+        animation: __load-in4 3s steps(16);
+    }
+}
+
+@keyframes __load-in1 {
+    0% { height: 0; }
+    25% { height: 100%; }
+    50% { height: 100%; }
+    75% { height: 100%; }
+    100% { height: 100%; }
+}
+@keyframes __load-in2 {
+    0% { height: 0; }
+    25% { height: 0; }
+    50% { height: 100%; }
+    75% { height: 100%; }
+    100% { height: 100%; }
+}
+@keyframes __load-in3 {
+    0% { height: 0; }
+    25% { height: 0; }
+    50% { height: 0; }
+    75% { height: 100%; }
+    100% { height: 100%; }
+}
+@keyframes __load-in4 {
+    0% { height: 0; }
+    25% { height: 0; }
+    50% { height: 0; }
+    75% { height: 0; }
+    100% { height: 100%; }
+}
+
+/*.block_two .char:hover {*/
+/*background-color: red;*/
+/*}*/
+/*.block_one .char:hover {*/
+/*background-color: red;*/
+/*}*/
+/*.hover {*/
+/*background-color: red;*/
+/*}*/
+
+/*.fade-enter {*/
+/*right: 100px;*/
+/*}*/
+
+/*.fade-enter-active {*/
+/*right: 0;*/
+/*transition: .5s ease-in all;*/
+/*}*/

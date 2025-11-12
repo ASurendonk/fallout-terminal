@@ -1,0 +1,15 @@
+$ns: mainframe;
+
+.#{$ns} {
+    height: 100vh;
+
+    .#{$ns}-content {
+        width: 630px;
+        height: 500px;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform-origin: 50% 50%;
+    }
+}

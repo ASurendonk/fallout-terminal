@@ -1,0 +1,221 @@
+@import "../../../App";
+$ns: system;
+
+.#{$ns} {
+    height: 100%;
+
+    .#{$ns}-screen {
+        background-color: rgba(0, 0, 0, 0.95);
+        height: 100%;
+        padding: 50px;
+        box-sizing: border-box;
+    }
+
+    .#{$ns}-content {
+        position: relative;
+        height: 100%;
+
+        background-image: repeating-linear-gradient($color 0%, $color 40%, $color-highlight 50%, $color 60%, $color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 200%;
+
+
+        word-break: break-word;
+        z-index: 50;
+
+        font-family: $share-tech;
+        font-size: 18px;
+        text-shadow: 0 0 5px rgba($color, 0.5);
+        line-height: 20px;
+        animation: rainbow 40s infinite;
+
+        ::selection {
+            background: $color-highlight;
+            -webkit-text-fill-color: $color;
+        }
+    }
+}
+
+@keyframes rainbow {
+    0%{background-position: 100% 100%}
+    40%{background-position: 100% 100%}
+    50%{background-position: 100% 0}
+    60%{background-position: 100% -100%}
+    100%{background-position: 100% -100%}
+}
+
+.vignette {
+    position: absolute;
+    z-index: 40;
+    top: 0;
+    left: -25%;
+    height: 100%;
+    width: 150%;
+    background: radial-gradient(circle at center, transparent 50%, rgba(0,0,0,1));
+    filter: blur(80px);
+    overflow: hidden;
+}
+.glare {
+    position: absolute;
+    z-index: 40;
+    top: 130px;
+    left: 110px;
+    width: 300px;
+    height: 25px;
+    background: #b4b4b4;
+    opacity: .2;
+    filter: blur(30px);
+    transform: rotate(-4deg);
+}
+.shadow {
+    position: absolute;
+    z-index: 40;
+    top: 0;
+    height: 90%;
+    width: 100%;
+    filter: blur(20px);
+    opacity: 0.5;
+    &:after{
+        box-shadow: 0 0 0 80px #000;
+        border-radius: 100%;
+        position: absolute;
+        height: 100%;
+        content: "";
+        right: -20%;
+        left: -20%;
+        top: 5%;
+    }
+}
+
+.pixelation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 65%, rgba(0, 0, 0, 0.3) 35%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 55;
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+    filter: blur(0.5px);
+
+    &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(18, 16, 16, 0.1);
+        opacity: 0;
+        z-index: 2;
+        pointer-events: none;
+        //animation: flicker .25s infinite;
+        animation: flicker 5s infinite;
+    }
+}
+
+.rolling-glitch {
+    width: 100%;
+    height: 20px;
+    background-color: $color;
+    position: absolute;
+    top: -500%;
+    animation: rolling 30s infinite;
+    filter: blur(30px);
+    opacity: 0.1;
+}
+
+@keyframes rolling {
+    0% {top: -500%}
+    100% {top: 100%}
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.27861;
+        //filter: contrast(127%);
+    }
+    5% {
+        opacity: 0.34769;
+        //filter: contrast(134%);
+    }
+    10% {
+        opacity: 0.23604;
+        //filter: contrast(123%);
+    }
+    15% {
+        opacity: 0.90626;
+        //filter: contrast(190%);
+    }
+    20% {
+        opacity: 0.18128;
+        //filter: contrast(118%);
+    }
+    25% {
+        opacity: 0.83891;
+        //filter: contrast(183%);
+    }
+    30% {
+        opacity: 0.65583;
+        //filter: contrast(165%);
+    }
+    35% {
+        opacity: 0.67807;
+        //filter: contrast(167%);
+    }
+    40% {
+        opacity: 0.26559;
+        //filter: contrast(126%);
+    }
+    45% {
+        opacity: 0.84693;
+        //filter: contrast(184%);
+    }
+    50% {
+        opacity: 0.96019;
+        //filter: contrast(196%);
+    }
+    55% {
+        opacity: 0.08594;
+        //filter: contrast(108%);
+    }
+    60% {
+        opacity: 0.20313;
+        //filter: contrast(120%);
+    }
+    65% {
+        opacity: 0.71988;
+        //filter: contrast(171%);
+    }
+    70% {
+        opacity: 0.53455;
+        //filter: contrast(153%);
+    }
+    75% {
+        opacity: 0.37288;
+        //filter: contrast(137%);
+    }
+    80% {
+        opacity: 0.71428;
+        //filter: contrast(171%);
+    }
+    85% {
+        opacity: 0.70419;
+        //filter: contrast(170%);
+    }
+    90% {
+        opacity: 0.7003;
+        //filter: contrast(170%);
+    }
+    95% {
+        opacity: 0.36108;
+        //filter: contrast(136%);
+    }
+    100% {
+        opacity: 0.24387;
+        //filter: contrast(124%);
+    }
+}

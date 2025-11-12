@@ -1,0 +1,36 @@
+.App {
+}
+
+$color: #08890a;
+$color-highlight: #25ff16;
+
+// FONTS
+@font-face {
+    font-family: 'share-tech';
+    src: url('./assets/fonts/ShareTechMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+$share-tech: 'share-tech', monospace;
+@font-face {
+    font-family: 'Kelvinized';
+    src: url('./assets/fonts/Kelvinized.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+$Kelvinized: 'Kelvinized', monospace;
+
+.screen {
+    display: flex;
+    flex-direction: column;
+
+    .screen-content {
+        flex: 1;
+    }
+    .line {
+        display: block;
+        &.spacer {
+            margin-bottom: 15px;
+        }
+    }
+}
