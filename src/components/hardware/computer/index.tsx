@@ -4,6 +4,7 @@ import ComputerOffScreen from 'assets/images/computer/screen.png';
 import './styles.scss';
 import { CalculateScale } from 'helpers';
 import { Power } from '../power';
+import { LoadingOverlay } from '../loading';
 import { AudioManager, sounds } from 'helpers/sounds';
 import { useSelector } from "react-redux";
 import { getPower, setColor } from "store/mainframeSlice";
@@ -21,6 +22,7 @@ export const Computer = ({children}: ComputerProps) => {
     const dispatch = useDispatch();
 
     const [sittingScale, setSittingScale] = useState(0.9); // default sitting scale
+    const [isLoading, setIsLoading] = useState(true);
 
     const updateScale = useCallback((delta?: number) => {
         delta = delta ? delta : 0;
@@ -71,6 +73,16 @@ export const Computer = ({children}: ComputerProps) => {
     }, [dispatch]);
 
     useEffect(() => {
+        // preload the background image
+        const img = new Image();
+        img.src = ComputerCutOut;
+        img.onload = () => {
+            setIsLoading(false);
+        };
+        img.onerror = () => {
+            setTimeout(() => setIsLoading(false), 3000);
+        };
+
         // audio
         const audioManager = new AudioManager();
         audioManager.loadSounds(sounds).then(() => {
@@ -83,17 +95,20 @@ export const Computer = ({children}: ComputerProps) => {
     }, [loadState]);
 
     return (
-        <div className="computer sitting" ref={ref} onWheel={handleScroll}>
-            <div className="computer-content" style={{ transform: `scale(${sittingScale})` }}>
-                {children}
-                <div className="computer-hardware">
-                    <div className="computer-box" style={{transform: `scale(${scale})`}}>
-                        <img className="computer-cut-out" src={ComputerCutOut} alt=""/>
-                        <Power/>
-                        <img className={`computer-off-screen ${power ? "on" : "off"}`} src={ComputerOffScreen} alt=""/>
+        <>
+            <LoadingOverlay isLoading={isLoading} />
+            <div className="computer sitting" ref={ref} onWheel={handleScroll}>
+                <div className="computer-content" style={{ transform: `scale(${sittingScale})` }}>
+                    {children}
+                    <div className="computer-hardware">
+                        <div className="computer-box" style={{transform: `scale(${scale})`}}>
+                            <img className="computer-cut-out" src={ComputerCutOut} alt=""/>
+                            <Power/>
+                            <img className={`computer-off-screen ${power ? "on" : "off"}`} src={ComputerOffScreen} alt=""/>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
