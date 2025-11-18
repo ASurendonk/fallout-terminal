@@ -1,36 +1,45 @@
 .App {
 }
 
-$color: #08890a;
-$color-highlight: #25ff16;
+:root {
+    --color: #08890a;
+    --color-shadow: rgba(8, 137, 10, 0.35);
+    --color-highlight: #25ff16;
+}
+
+$color: var(--color);
+$color-shadow: var(--color-shadow);
+$color-highlight: var(--color-highlight);
 
 // FONTS
-@font-face {
-    font-family: 'share-tech';
-    src: url('./assets/fonts/ShareTechMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-$share-tech: 'share-tech', monospace;
-@font-face {
-    font-family: 'Kelvinized';
-    src: url('./assets/fonts/Kelvinized.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-$Kelvinized: 'Kelvinized', monospace;
+$share-tech: "Share Tech Mono", monospace;
 
 .screen {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    max-height: 100%;
+    white-space: pre-line;
 
     .screen-content {
         flex: 1;
     }
+    .screen-spacer {
+        flex: 1;
+    }
+
     .line {
         display: block;
         &.spacer {
             margin-bottom: 15px;
         }
+        > pre {
+            margin: 0;
+        }
+    }
+
+    pre {
+        margin: 0;
+        font-family: $share-tech;
     }
 }

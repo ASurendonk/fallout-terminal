@@ -1,20 +1,18 @@
 @import "../../../../App";
 
-$color: #08890a;
-$color-highlight: #25ff16;
-
 $ns: input;
 
 .#{$ns} {
+    display: inline-block;
     > input {
-        margin-left: 10px;
         width: 150px;
         font-family: $share-tech;
         font-size: 18px;
-        border: none;
         outline: none;
         background-color: transparent;
         caret-color: $color-highlight;
-        border-bottom: 2px solid $color;
+        border: 2px solid $color;
+        border-radius: 4px;
+        cursor: inherit;
     }
 }

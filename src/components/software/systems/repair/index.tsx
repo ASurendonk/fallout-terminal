@@ -1,0 +1,37 @@
+import React, { useCallback, useMemo, useState } from "react";
+import { Button, Title } from "components/software/elements";
+import { Sequencer } from "components/sequencer";
+import { navigate } from "helpers/index.ts";
+import { SYSTEMS } from "types/index.ts";
+import { RepairGame } from "components/software/games/repair";
+
+export const Repair = () => {
+
+    const [index, setIndex] = useState(0);
+    const [skip, setSkip] = useState(false);
+
+    const sequencerProps = useMemo(() => ({
+        onComplete: setIndex,
+        index: index,
+        skip: skip,
+    }), [setIndex, index, skip]);
+
+    const onScreenClick = useCallback(() => {
+        setSkip(true);
+    }, []);
+
+    return (
+        <div className="home screen" onClick={onScreenClick}>
+            <Title loggedIn/>
+            <div>{"HOME > REPAIR"}</div>
+            <br/>
+
+            <RepairGame />
+
+            <div className="screen-spacer"/>
+            <Sequencer line order={0} msDelay={100} {...sequencerProps}>
+                <Button label="DONE" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+            </Sequencer>
+        </div>
+    );
+}

@@ -1,0 +1,47 @@
+@import "../../../../App";
+
+$ns: slider;
+
+.#{$ns} {
+    display: inline-flex;
+    flex-direction: row;
+
+    .#{$ns}-label {
+        display: inline-block;
+        width: 80px;
+    }
+
+    > input {
+        width: 150px;
+        font-family: $share-tech;
+        font-size: 18px;
+        border: 2px solid $color;
+        border-radius: 4px;
+        cursor: inherit;
+        margin: 0;
+        margin-right: 5px;
+
+        -webkit-appearance: none;
+        height: 15px;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: $color-highlight;
+            border-radius: 2px;
+        }
+
+        &::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: $color-highlight;
+            border-radius: 2px;
+        }
+    }
+}

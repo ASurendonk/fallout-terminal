@@ -11,5 +11,14 @@ $ns: mainframe;
         left: 50%;
         top: 50%;
         transform-origin: 50% 50%;
+
+        &.on {
+            //cursor: url("../../../assets/images/cursor-dark.png"), auto;
+            //cursor: none;
+        }
+
+        &.off {
+            cursor: default !important;
+        }
     }
 }

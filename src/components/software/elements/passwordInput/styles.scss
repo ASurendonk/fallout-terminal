@@ -1,0 +1,30 @@
+@import "../../../../App";
+
+$ns: password-input;
+
+.#{$ns} {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    input {
+        position: absolute;
+        top: 198px;
+        left: 1px;
+        width: 150px;
+        font-family: $share-tech;
+        font-size: 18px;
+        outline: none;
+        background-color: transparent;
+        caret-color: $color-highlight;
+        border: 2px solid $color;
+        border-radius: 4px;
+        cursor: inherit;
+    }
+
+    .#{$ns}-display {
+        display: inline;
+        margin-left: 4px;
+    }
+}

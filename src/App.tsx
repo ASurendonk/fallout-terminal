@@ -1,8 +1,9 @@
-import React from 'react';
-import './App.scss';
-import { Computer, MainFrame } from './components';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import "./App.scss";
+
+import { Provider } from "react-redux";
+
+import { store } from "./store/index.ts";
+import { Computer, MainFrame } from "./components";
 
 function App() {
     return (
@@ -16,4 +17,4 @@ function App() {
     );
 }
 
-export default App;
+export default App

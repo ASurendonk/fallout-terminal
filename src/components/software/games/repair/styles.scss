@@ -1,0 +1,34 @@
+@import "../../../../App";
+
+$ns: repair;
+
+.#{$ns} {
+
+    .#{$ns}-char {
+        cursor: inherit;
+
+        &.error {
+            background: $color-shadow;
+        }
+        &.scanner {
+            background: $color-highlight;
+        }
+        &:hover {
+            background: $color-highlight;
+            -webkit-text-fill-color: $color;
+            transition: none;
+        }
+    }
+
+    .#{$ns}-line-state {
+        display: inline-block;
+        width: 60px;
+        padding-left: 10px;
+
+        &.true {
+            background: $color-highlight;
+            -webkit-text-fill-color: $color;
+            transition: none;
+        }
+    }
+}

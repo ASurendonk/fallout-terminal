@@ -1,34 +1,68 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
-import {Sequencer} from 'components';
-import {Button, Title} from 'components/software/elements';
-import {navigate} from 'helpers';
-import {SYSTEMS} from 'types';
+import { Sequencer } from 'components/index.ts';
+import { Button, Title } from 'components/software/elements';
+import { navigate } from 'helpers/index.ts';
+import { SYSTEMS } from 'types/index.ts';
+import { Notification } from "components/software/elements/notification";
 
 export const Home = () => {
+
     const [index, setIndex] = useState(0);
-    const [endLoad, setEndLoad] = useState(false);
+    const [skip, setSkip] = useState(false);
 
     const sequencerProps = useMemo(() => ({
         onComplete: setIndex,
         index: index,
-        end: endLoad,
-    }), [setIndex, index, endLoad]);
+        skip: skip,
+    }), [setIndex, index, skip]);
 
     const onScreenClick = useCallback(() => {
-        setEndLoad(true);
+        setSkip(true);
     }, []);
 
     return (
         <div className="home screen" onClick={onScreenClick}>
-            <Title />
-            <Sequencer className="line spacer" order={0} {...sequencerProps}>HOME</Sequencer>
-            <Sequencer className="line" order={1} {...sequencerProps}>
-                {'> '}<Button label="MAP" onClick={() => navigate(SYSTEMS.MAP)} />
+            <Title loggedIn/>
+            <div>{"HOME"}</div>
+            <br/>
+
+            <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
+            <br/>
+
+            <div><Sequencer order={1} {...sequencerProps}>Welcome VD#1514</Sequencer></div>
+            <br/>
+
+            <Sequencer line order={2} msDelay={100} {...sequencerProps}>
+                <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
             </Sequencer>
-            <Sequencer className="line" order={2} {...sequencerProps}>
-                {'> '}<Button label="RESET" onClick={() => navigate(SYSTEMS.BOOT)} />
+
+            <Sequencer line order={3} msDelay={100} {...sequencerProps}>
+                <Button label="MAP" fullWidth onClick={() => navigate(SYSTEMS.MAP)}/>
             </Sequencer>
+
+            <Sequencer line order={4} msDelay={100} {...sequencerProps}>
+                <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>
+            </Sequencer>
+
+            <div className="screen-spacer"/>
+
+            <Sequencer line order={5} msDelay={100} {...sequencerProps}>
+                <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
+            </Sequencer>
+
+            <Notification/>
         </div>
     );
 }
+
+// Vault-Tec: Keeping the fallout, out.
+// Vault-Tec: You're not 6 feet under, you're 300!
+
+
+// Ascii Font: pagga
+const artTitle = `
+░█░█░█▀█░█░█░█░░░▀█▀░░░█░█░█░█
+░█░█░█▀█░█░█░█░░░░█░░░░▀▀█░▀▀█
+░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░░░░░▀░░░▀
+`.trimStart();

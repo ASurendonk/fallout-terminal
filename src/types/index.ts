@@ -5,4 +5,7 @@ export enum SYSTEMS {
     HACK = 'hack',
     HOME = 'home',
     MAP = 'map',
+    ENTRIES = 'entries',
+    LOG = 'log',
+    REPAIR = 'repair',
 }

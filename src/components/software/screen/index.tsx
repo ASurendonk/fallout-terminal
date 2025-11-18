@@ -1,13 +1,16 @@
 import React from 'react';
 import './styles.scss';
-import {useAppSelector} from 'redux/hooks';
+
+import { useSelector } from "react-redux";
+import { getPower } from "store/mainframeSlice.ts";
+import ComputerOffScreen from "assets/images/computer/screen.png";
 
 type SystemProps = {
     children: React.ReactNode;
 }
 
 export const Screen = ({children}: SystemProps) => {
-    const power = useAppSelector(state => state.power);
+    const power = useSelector(getPower);
 
     return (
         <div className="system">
@@ -16,15 +19,17 @@ export const Screen = ({children}: SystemProps) => {
                     {children}
                 </div>
             </div>
-            <div className="vignette" />
-            <div className="glare" />
-            <div className="shadow" />
-            {power ?
-            <>
-                <div className="pixelation" />
-                <div className="rolling-glitch" />
-            </>
-            : null}
+
+            {/*<div className="vignette" />*/}
+            {/*<div className="glare" />*/}
+            {/*<div className="shadow" />*/}
+            <img className={`system-artifacts ${power ? "on" : "off"}`} src={ComputerOffScreen} alt=""/>
+            {power ? (
+                <>
+                    <div className="pixelation"/>
+                    <div className="rolling-glitch"/>
+                </>
+            ) : null}
         </div>
     );
 }

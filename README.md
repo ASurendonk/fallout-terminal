@@ -1,12 +1,30 @@
-# fallout-terminal
-A web-based recreation of a fallout terminal, with hacking minigame.
+# React + TypeScript + Vite
 
-## Licensing
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-All source code in this repository is licensed under the MIT License (see LICENSE).
+Currently, two official plugins are available:
 
-This project is a **fan-made recreation** inspired by the Fallout series by Bethesda Softworks.
-All visual elements, including the Fallout terminal screenshot used for the UI reference,
-are the property of Bethesda Softworks. This project is **non-commercial** and **not affiliated with or endorsed by Bethesda** in any way.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-No Bethesda assets (models, textures, sounds, or game files) are distributed here.
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

@@ -1,8 +1,5 @@
 @import "../../../../App";
 
-$color: #08890a;
-$color-highlight: #25ff16;
-
 $ns: button;
 
 .#{$ns} {
@@ -11,10 +8,23 @@ $ns: button;
     font-size: 18px;
     padding: 0;
     border: none;
+    border-radius: 1.5px;
+    cursor: inherit;
+    color: inherit;
+    text-shadow: inherit;
 
     &:hover {
         background-color: $color-highlight;
         -webkit-background-clip: unset;
         -webkit-text-fill-color: $color;
+    }
+
+    &:focus {
+        outline:0;
+    }
+
+    &.full-width {
+        width: 100%;
+        text-align: left;
     }
 }

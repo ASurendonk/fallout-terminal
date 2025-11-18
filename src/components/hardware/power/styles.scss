@@ -7,74 +7,18 @@ $ns: power;
     z-index: 60;
     pointer-events: all;
 
-    .power-button-background {
-        background-color: #150a0a;
-        //background-color: white;
-        width: 48px;
-        height: 46px;
-        top: 3px;
-        left: 2px;
+    .#{$ns}-button {
+        width: 47px;
+        left: 4px;
         position: relative;
-        border-radius: 50%;
+        top: -2px;
+        cursor: pointer;
 
-        .power-button {
-            position: relative;
-            top: -2px;
-            left: -1px;
-            width: 48px;
-            height: 48px;
-
-            .light {
-                width: 40px;
-                height: 40px;
-                position: absolute;
-                top: 3px;
-                left: 2px;
-                border-radius: 50%;
-                opacity: 0.5;
-            }
-            .button-rim {
-                position: relative;
-                width: 100%;
-                border-radius: 50%;
-                box-shadow: 2px 2px 2px #150a0a;
-            }
-
-            &.on {
-                .light {
-                    //background: radial-gradient(#00f800, transparent 80%);
-                }
-            }
-            &.off {
-                .light {
-                    //background: radial-gradient(#ff1e1e, transparent 80%);
-                }
-            }
-            &:active {
-                top: 0px;
-                left: 0.5px;
-                width: 47px;
-                height: 47px;
-                opacity: 0.9;
-
-                .button-rim {
-                    box-shadow: 1px 1px 1px #150a0a;
-                }
-            }
-
-            .glass-scratches {
-                background-image: url('../../../assets/images/glass-scratches.png');
-                background-size: 500px;
-                background-position: -93px 296px;
-                width: 47px;
-                height: 47px;
-                border-radius: 50%;
-                position: absolute;
-                top: 2px;
-                left: 0;
-                filter: blur(0.2px);
-                opacity: 0.5;
-            }
+        &.on {
+            // nothing
+        }
+        &.off {
+            opacity: 0;
         }
     }
 }

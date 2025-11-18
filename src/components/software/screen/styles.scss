@@ -1,4 +1,6 @@
+@use "sass:color";
 @import "../../../App";
+
 $ns: system;
 
 .#{$ns} {
@@ -14,6 +16,7 @@ $ns: system;
     .#{$ns}-content {
         position: relative;
         height: 100%;
+        overflow: hidden;
 
         background-image: repeating-linear-gradient($color 0%, $color 40%, $color-highlight 50%, $color 60%, $color);
         -webkit-background-clip: text;
@@ -26,7 +29,7 @@ $ns: system;
 
         font-family: $share-tech;
         font-size: 18px;
-        text-shadow: 0 0 5px rgba($color, 0.5);
+        text-shadow: -2px 0 3px $color-shadow, 2px 0 3px $color-shadow;
         line-height: 20px;
         animation: rainbow 40s infinite;
 
@@ -86,6 +89,14 @@ $ns: system;
         left: -20%;
         top: 5%;
     }
+}
+
+.system-artifacts {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    width: 610px;
+    opacity: 0.2;
 }
 
 .pixelation {

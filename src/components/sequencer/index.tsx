@@ -1,61 +1,89 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import { playAudio, tick } from 'helpers/sounds';
-import {useAppSelector} from 'redux/hooks';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSelector } from "react-redux";
+import { getPower } from "store/mainframeSlice.ts";
+import { SoundCode } from "helpers/sounds.ts";
 
-interface SequencerProps {
+export interface SequencerProps {
     children: string | React.ReactNode;
     className?: string;
+    line?: boolean;
+    spacer?: boolean;
     order?: number;
     index?: number;
     onComplete?(index: number): void;
-    end?: boolean;
+    skip?: boolean;
+    reserveSpace?: boolean;
+    art?: boolean;
+    speed?: number;
+    volume?: number;
+    msDelay?: number;
 }
 
 const isValidNumber: (number?: any) => boolean = (number) => {
     return number !== undefined && !isNaN(number);
 }
 
-export const Sequencer = ({children, className, onComplete, order, index, end}: SequencerProps) => {
+export const Sequencer = ({children, className, line, spacer, onComplete, order, index, skip, reserveSpace, art, speed = 20, volume = 0.01, msDelay}: SequencerProps) => {
+
+    const power = useSelector(getPower);
     const [output, setOutput] = useState<string | React.ReactNode>('');
-    const [timer, setTimer] = useState<any>();
-    const power = useAppSelector(state => state.power);
 
-    const loadNext = useCallback((iteration: number) => {
-        let timeout: any;
-
-        if (typeof children !== 'string') {
-            setOutput(children);
-            if (onComplete) {
-                if (order !== undefined && order >= 0) {
-                    onComplete(order + 1);
-                } else {
-                    onComplete(0);
-                }
-            }
+    const onFinish = useCallback(() => {
+        if (!onComplete) {
             return;
         }
 
-        if (iteration < children.length) {
-            timeout = setTimeout(() => {
-                if (children[iteration] !== '~') {
-                    setOutput(v => v + children[iteration]);
-                    playAudio(tick, 0.01);
-                }
-                loadNext(iteration + 1);
-            }, 20);
-            setTimer(timeout);
-        } else {
-            if (onComplete) {
-                if (order !== undefined && order >= 0) {
-                    onComplete(order + 1);
-                } else {
-                    onComplete(0);
-                }
-            }
+        if (msDelay && msDelay > 0) {
+            window.audioManager.play(SoundCode.tick, volume);
+            setTimeout(() => {
+                onComplete(order !== undefined && order >= 0 ? order + 1 : 0);
+            }, msDelay);
+            return;
         }
-    }, [children, order, onComplete]);
+
+        onComplete(order !== undefined && order >= 0 ? order + 1 : 0);
+    }, [onComplete, msDelay, order, volume]);
 
     useEffect(() => {
+        let timeout: any;
+
+        const loadNext = (iteration: number) => {
+            if (typeof children !== 'string') {
+                setOutput(children);
+                if (!onComplete) {
+                    return;
+                }
+                onFinish();
+                return;
+            }
+
+            if (art) {
+                const lines = children.split("\n").length;
+                if (iteration < lines) {
+                    timeout = setTimeout(() => {
+                        setOutput(children.split("\n").splice(0, iteration + 1).join("\n"));
+                        window.audioManager.play(SoundCode.tick, volume);
+                        loadNext(iteration + 1);
+                    }, 100);
+                } else {
+                    onFinish();
+                }
+                return;
+            }
+
+            if (iteration < children.length) {
+                timeout = setTimeout(() => {
+                    if (children[iteration] !== '~') {
+                        setOutput(prevOutput => prevOutput + children[iteration]);
+                        iteration % 2 ? window.audioManager.play(SoundCode.tick, volume) : null;
+                    }
+                    loadNext(iteration + 1);
+                }, speed);
+            } else {
+                onFinish();
+            }
+        };
+
         if (isValidNumber(order) || isValidNumber(index)) {
             if (order === index) {
                 loadNext(0);
@@ -63,18 +91,37 @@ export const Sequencer = ({children, className, onComplete, order, index, end}: 
         } else {
             loadNext(0);
         }
-        return () => clearTimeout(timer);
-    }, [loadNext, order, index]);
+
+        if (skip) {
+            clearTimeout(timeout);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [children, order, index, onComplete, skip, speed, volume, onFinish, art]);
 
     useEffect(() => {
-        if (end || !power) {
-            clearTimeout(timer);
+        if (skip || !power) {
             setOutput(typeof children === 'string' ? children.replaceAll('~', '') : children);
         }
-    }, [children, timer, end, power]);
+    }, [children, skip, power]);
 
-    if (className) {
-        return <div className={className}>{output}</div>;
+    if (art) {
+        return <pre style={{ fontFamily: "monospace" }}>{output}</pre>;
+    }
+
+    if (line || spacer || className) {
+        return (
+            <pre style={{ whiteSpace: "pre-line" }}>
+                <div className={`${line && 'line'} ${spacer && 'spacer'} ${className}`}>
+                    {reserveSpace && !output && <pre> </pre>}
+                    {output}
+                </div>
+            </pre>
+        );
+    }
+
+    if (reserveSpace) {
+        return <pre><div className="line">{output ?? " "}</div></pre>;
     }
 
     return <>{output}</>;

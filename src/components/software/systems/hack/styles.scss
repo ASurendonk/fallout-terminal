@@ -3,7 +3,15 @@
 $ns: hack;
 $char-width: 9.5px;
 
+.#{$ns}-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .#{$ns}-wrapper {
+    max-height: 100%;
+    overflow: hidden;
     display: grid;
     grid-gap: 0 (1.4*$char-width);
     grid-template-columns: (6*$char-width) (12*$char-width) (6*$char-width) (12*$char-width) (14*$char-width);
@@ -38,10 +46,15 @@ $char-width: 9.5px;
             flex-direction: column;
             .#{$ns}-console-history {
                 flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                overflow: hidden;
             }
             .#{$ns}-console-input {
                 display: flex;
                 align-items: center;
+
                 > span {
 
                 }
@@ -56,6 +69,8 @@ $char-width: 9.5px;
                     outline: none;
                     caret-color: $color-highlight;
                     text-transform: uppercase;
+                    cursor: inherit;
+                    text-shadow: inherit;
                 }
             }
         }
@@ -83,14 +98,13 @@ $char-width: 9.5px;
         height: 20px;
         display: inline-block;
         &:hover {
-            //@include arpp-bg-color-highlight();
             background: $color-highlight;
             -webkit-text-fill-color: $color;
             transition: none;
         }
+        cursor: inherit;
     }
     .#{$ns}-hover {
-        //@include arpp-bg-color-highlight();
         background: $color-highlight;
         -webkit-text-fill-color: $color;
         transition: none;
@@ -138,22 +152,3 @@ $char-width: 9.5px;
     75% { height: 0; }
     100% { height: 100%; }
 }
-
-/*.block_two .char:hover {*/
-/*background-color: red;*/
-/*}*/
-/*.block_one .char:hover {*/
-/*background-color: red;*/
-/*}*/
-/*.hover {*/
-/*background-color: red;*/
-/*}*/
-
-/*.fade-enter {*/
-/*right: 100px;*/
-/*}*/
-
-/*.fade-enter-active {*/
-/*right: 0;*/
-/*transition: .5s ease-in all;*/
-/*}*/

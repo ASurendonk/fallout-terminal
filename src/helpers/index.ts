@@ -1,6 +1,6 @@
-import {SYSTEMS} from 'types';
-import {store} from 'redux/store';
-import {SystemActionTypes} from 'redux/actions';
+import { SYSTEMS } from 'types/index';
+import { store } from 'store/index.ts';
+import { boot } from 'store/mainframeSlice.ts';
 
 // these represent the content size to scale
 const width = 920;
@@ -12,5 +12,5 @@ export const CalculateScale = (clientHeight: number, clientWidth: number) => {
 }
 
 export const navigate = (location: SYSTEMS) => {
-    store.dispatch({ type: SystemActionTypes.SET_SYSTEM, payload: location})
+    store.dispatch(boot(location));
 };

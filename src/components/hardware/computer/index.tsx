@@ -1,18 +1,47 @@
-import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react';
-import ComputerCutOut from 'assets/images/computer-cut-out4.png';
+import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import ComputerCutOut from 'assets/images/computer/background.png';
+import ComputerOffScreen from 'assets/images/computer/screen.png';
 import './styles.scss';
-import {CalculateScale} from 'helpers';
-import {Power} from '../power';
-import {playRandomKey} from 'helpers/sounds';
+import { CalculateScale } from 'helpers/index';
+import { Power } from '../power';
+import { AudioManager, sounds } from 'helpers/sounds';
+import { useSelector } from "react-redux";
+import { getPower, setColor } from "store/mainframeSlice.ts";
+import { StorageCode, StorageManager } from "helpers/storage.ts";
+import { useDispatch } from "hooks/dispatch.ts";
 
 type ComputerProps = {
     children?: ReactNode;
 };
 
 export const Computer = ({children}: ComputerProps) => {
-    const [sit, setSit] = useState(false);
     const [scale, setScale] = useState(0);
     const ref = useRef<any>();
+    const power = useSelector(getPower);
+    const dispatch = useDispatch();
+
+    const [sittingScale, setSittingScale] = useState(0.5);
+
+    const updateScale = useCallback((delta?: number) => {
+        delta = delta ? delta : 0;
+        let newSittingScale = sittingScale + delta;
+
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        const lowerBound = 0.6 / aspectRatio; // zoomed out
+        const upperBound = 1; // zoomed in
+        newSittingScale = Math.min(Math.max(newSittingScale, lowerBound), upperBound);
+
+        setSittingScale(newSittingScale);
+    }, [sittingScale]);
+
+    const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        updateScale(delta);
+    };
+
+    useEffect(() => {
+        updateScale();
+    }, [updateScale]);
 
     const scaleBox = useCallback(() => {
         const mf = ref.current;
@@ -25,27 +54,43 @@ export const Computer = ({children}: ComputerProps) => {
         window.addEventListener('resize', scaleBox);
     }, [scaleBox]);
 
-    const sitDown = useCallback(() => {
-        setSit(true);
-    }, []);
-
     useEffect(() => {
         window.addEventListener('keydown', event => {
             if (event.repeat) {
                 return;
             }
-            playRandomKey();
+            window.audioManager.playRandomKey();
         });
     }, []);
 
+    const loadState = useCallback(() => {
+        const color = window.storageManager.getItem(StorageCode.color);
+        if (color) {
+            dispatch(setColor(color));
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
+        // audio
+        const audioManager = new AudioManager();
+        audioManager.loadSounds(sounds).then(() => {
+            window.audioManager = audioManager;
+        });
+
+        // storage
+        window.storageManager = new StorageManager();
+        loadState()
+    }, [loadState]);
+
     return (
-        <div className={`computer ${sit ? 'sitting' : ''}`} ref={ref} onClick={sitDown}>
-            <div className="computer-content">
+        <div className="computer sitting" ref={ref} onWheel={handleScroll}>
+            <div className="computer-content" style={{ transform: `scale(${sittingScale})` }}>
                 {children}
                 <div className="computer-hardware">
                     <div className="computer-box" style={{transform: `scale(${scale})`}}>
-                        <img className="computer-cut-out" src={ComputerCutOut} alt="" />
-                        <Power />
+                        <img className="computer-cut-out" src={ComputerCutOut} alt=""/>
+                        <Power/>
+                        <img className={`computer-off-screen ${power ? "on" : "off"}`} src={ComputerOffScreen} alt=""/>
                     </div>
                 </div>
             </div>

@@ -1,33 +1,55 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
-import {Button, Title} from 'components/software/elements';
-import GoogleMapReact from 'google-map-react';
-import {SYSTEMS} from 'types';
-import {navigate} from 'helpers';
-
-const center = {
-    lat: 59.95,
-    lng: 30.33
-};
+import { Button, Title } from 'components/software/elements';
+import { SYSTEMS } from 'types/index';
+import { navigate } from 'helpers/index';
+import { Sequencer } from "components/sequencer";
 
 export const Map = () => {
-    const [endLoad, setEndLoad] = useState(false);
+
+    const [index, setIndex] = useState(0);
+    const [skip, setSkip] = useState(false);
+
+    const sequencerProps = useMemo(() => ({
+        onComplete: setIndex,
+        index: index,
+        skip: skip,
+    }), [setIndex, index, skip]);
 
     const onScreenClick = useCallback(() => {
-        setEndLoad(true);
+        setSkip(true);
     }, []);
-    //a8cb7c57e4b0340b
 
     return (
-        <div className="map screen" onClick={onScreenClick}>
-            <Title />
-            <Button label="BACK" onClick={() => navigate(SYSTEMS.HOME)} />
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyCPPXnglaEOZn9gtW6TKdCS4uTt9yvFqwk' }}
-                defaultCenter={center}
-                defaultZoom={11}
-                options={{ zoomControl: false, fullscreenControl: false }}
-            />
+        <div className="local-map screen" onClick={onScreenClick}>
+            <Title loggedIn/>
+            <div>{"HOME > MAP"}</div>
+            <br/>
+
+            <Sequencer art order={0} {...sequencerProps}>{artMap}</Sequencer>
+
+            <br/>
+            <br/>
+
+            <Sequencer line order={1} {...sequencerProps}>
+                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+            </Sequencer>
         </div>
     );
 }
+
+const artMap = `
+        ╔══════════════════════════════════╗         
+        ║                                  ║         
+        ║          ╔════════════════════╗  ║         
+  ╔═════╝          ║░░░░░░░░░░░░░░░░░░░░║  ║         
+  #                ║░░░░░░░░░░░░░░░░░░░░║  ║         
+  #                ║░░░░░░░░░░░░░░░░░░░░║  ║         
+  ╚═════╗          ║░░░░░░░░░░░░░░░░░░░░║  ╠══════╗  
+        ║          ╚════════════════════╝  ║    x ║  
+        ║                                  |      ║  
+        ╚══════════╦══------══╦═════════╗  ║      ║  
+                   ║  x       ║         ║  ╠══════╣  
+                   ║          ╚═┴═════┼═╝     ||||║  
+                   ╚════════════┬═════┼════╩══════╝  
+`;

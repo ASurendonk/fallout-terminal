@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import rw from 'random-word-by-length';
 
 export type Character = {
@@ -13,10 +15,15 @@ export type HackOption = {
     indexes: number[];
 }
 
+export enum HackType {
+    ResetTries = "ResetTries",
+    RemoveDud = "RemoveDud",
+}
+
 export default class Utils {
     static randomCharacters(length: number, block: 1000 | 2000): Character[]
     {
-        let text: Character[] = [];
+        const text: Character[] = [];
         const code = '~!`@#$%`^&*((`))<<>>{{`}}[[]];`:",/`\\-_=`+';
         for (let i = 0; i < length; i++)
             text.push({ id: block + i, value: code.charAt(Math.floor(Math.random() * code.length)) });
@@ -49,12 +56,12 @@ export default class Utils {
     // }
 
     static buildRandomWordPositions(block_length: number, word_length: number, total_positions: number) {
-        let positions = [];
-        let value = this.randomIntFromInterval(0, block_length - (word_length + 1));
+        const positions = [];
+        const value = this.randomIntFromInterval(0, block_length - (word_length + 1));
         positions.push(value);
 
         while(positions.length < total_positions) {
-            let value = this.randomIntFromInterval(0, block_length - (word_length + 1));
+            const value = this.randomIntFromInterval(0, block_length - (word_length + 1));
             let valid_value = true;
             positions.map(pos => {
                 if(value > pos + word_length + 1 || value + word_length + 1 < pos) {
@@ -73,9 +80,9 @@ export default class Utils {
     }
 
     static checkValidHackValue(v: string) {
-        let startHackValues = ['[','{','(','<'];
-        let endHackValues = [']','}',')','>'];
-        let index = startHackValues.indexOf(v);
+        const startHackValues = ['[','{','(','<'];
+        const endHackValues = [']','}',')','>'];
+        const index = startHackValues.indexOf(v);
         if(index > -1) {
             return endHackValues[index];
         } else
@@ -86,15 +93,15 @@ export default class Utils {
         if (!'<{[('.includes(char.value)) {
             return; // value is not a possible hack
         }
-        let block_index = char.id - idOffset;
-        let row_index = block_index % 12;
-        let endingHackValue = Utils.checkValidHackValue(char.value);
+        const block_index = char.id - idOffset;
+        const row_index = block_index % 12;
+        const endingHackValue = Utils.checkValidHackValue(char.value);
         if(12 - row_index > 0) {
             let value = '';
-            let indexes = [];
+            const indexes = [];
             for(let i = 0; i < 12 - row_index; i++) {
-                let _indexToCheck = block_index + i;
-                let _current_value = block[_indexToCheck].value;
+                const _indexToCheck = block_index + i;
+                const _current_value = block[_indexToCheck].value;
                 if(block[_indexToCheck].id < 100) break;
                 value += _current_value;
                 indexes.push(block[_indexToCheck].id);
@@ -114,12 +121,13 @@ export default class Utils {
     //         return value;
     //     }
     // }
-    //
-    // static isClearTries() {
-    //     let val = Math.floor(Math.random() * 5) + 1;
-    //     return val === 1;
-    // }
-    //
+
+    static determineHackType() {
+        const n = 5; // chance is 1 in n
+        const val = Math.floor(Math.random() * n) + 1;
+        return val === 1 ? HackType.ResetTries : HackType.RemoveDud;
+    }
+
     // static getRandom(n) {
     //     return Math.floor(Math.random() * n) + 1;
     // }
@@ -182,7 +190,7 @@ export default class Utils {
 
         let loop_limit = 100;
         while(words.length < total_words && loop_limit > 0) {
-            let new_word = Utils.getSimilarWord(initialWord, similarities[words.length - 1]);
+            const new_word = Utils.getSimilarWord(initialWord, similarities[words.length - 1]);
             if(new_word && words.indexOf(new_word) < 0) {
                 words.push(new_word);
             }

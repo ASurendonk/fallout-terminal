@@ -1,25 +1,30 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './styles.scss';
-import {Sequencer} from 'components';
-import {Button, Input, Title} from 'components/software/elements';
-import {navigate} from 'helpers';
-import {SYSTEMS} from 'types';
+import { Sequencer } from 'components/index.ts';
+import { Button, Title } from 'components/software/elements';
+import { navigate } from 'helpers/index.ts';
+import { SYSTEMS } from 'types/index.ts';
+import { PasswordInput } from "components/software/elements/passwordInput";
+import { getHackLoaded } from "store/mainframeSlice.ts";
+import { useSelector } from "react-redux";
 
 export const Login = () => {
     const [index, setIndex] = useState(0);
-    const [endLoad, setEndLoad] = useState(false);
+    const [skip, setSkip] = useState(false);
     const [password, setPassword] = useState('');
     const [notification, setNotification] = useState('');
     const passRef = useRef(password);
+    const hackLoaded = useSelector(getHackLoaded);
 
     const sequencerProps = useMemo(() => ({
         onComplete: setIndex,
         index: index,
-        end: endLoad,
-    }), [setIndex, index, endLoad]);
+        skip: skip,
+    }), [setIndex, index, skip]);
 
     const onScreenClick = useCallback(() => {
-        setEndLoad(true);
+        setSkip(true);
+        setIndex(99);
     }, []);
 
     useEffect(() => {
@@ -28,7 +33,7 @@ export const Login = () => {
 
     const eventFunction = useCallback((event: any) => {
         if (event.key === 'Enter') {
-            if (passRef.current === 'adam') {
+            if (passRef.current.toLowerCase() === 'adam') {
                 setNotification('> Password accepted.');
                 setTimeout(() => navigate(SYSTEMS.HOME), 1000);
             } else {
@@ -45,29 +50,44 @@ export const Login = () => {
 
     const banner = useMemo(() => {
         if (notification) return <Sequencer key="notification">{notification}</Sequencer>;
-        else return <Sequencer key="standard" order={4} {...sequencerProps}>{'> Enter password to access mainframe...'}</Sequencer>;
+        else return <Sequencer key="standard" order={5} {...sequencerProps}>{'> Enter password to access terminal...'}</Sequencer>;
     }, [notification, sequencerProps]);
+
+    const onPasswordChange = useCallback((value: string) => {
+        setPassword(value);
+    }, []);
 
     return (
         <div className="login screen" onClick={onScreenClick}>
             <Title />
             <div className="screen-content">
+                <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
                 <br/>
-                <br/>
-                <Sequencer className="line spacer" order={0} {...sequencerProps}>{"> LOGIN ADMIN"}</Sequencer>
-                <Sequencer className="line spacer" order={1} {...sequencerProps}>
-                    <Input value={password} onTextChange={setPassword} type="password" />
+                <Sequencer line order={1} {...sequencerProps}>{"LOGIN ADMIN"}</Sequencer>
+                <Sequencer line spacer order={2} {...sequencerProps}>
+                    <PasswordInput value={password} onTextChange={onPasswordChange} />
                 </Sequencer>
                 <br/>
-                <br/>
-                <Sequencer className="line spacer" order={2} {...sequencerProps} onComplete={undefined}>
-                    {'> '}<Button label={<Sequencer order={2} {...sequencerProps}>REBOOT</Sequencer>} onClick={() => navigate(SYSTEMS.BOOT)} />
+                <Sequencer line order={3} msDelay={100} {...sequencerProps}>
+                    <Button label="REBOOT" fullWidth onClick={() => navigate(SYSTEMS.BOOT)}/>
                 </Sequencer>
-                <Sequencer className="line" order={3} {...sequencerProps} onComplete={undefined}>
-                    {'> '}<Button label={<Sequencer order={3} {...sequencerProps}>@*0#.EXE/RUN</Sequencer>} onClick={() => navigate(SYSTEMS.HACK)} />
+                <Sequencer line order={4} msDelay={100} {...sequencerProps}>
+                    {hackLoaded ? (
+                        <Button label="####.EXE/RUN" fullWidth onClick={() => navigate(SYSTEMS.HACK)}/>
+                    ) : ""}
                 </Sequencer>
             </div>
             {banner}
         </div>
     );
 }
+
+// Ascii Font: ANSI Shadow
+const artTitle = `
+██████╗  ██████╗ ██████╗  ██████╗ ██████╗
+██╔══██╗██╔═══██╗██╔══██╗██╔════╝██╔═══██╗
+██████╔╝██║   ██║██████╔╝██║     ██║   ██║
+██╔══██╗██║   ██║██╔══██╗██║     ██║   ██║
+██║  ██║╚██████╔╝██████╔╝╚██████╗╚██████╔╝
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═════╝
+`.trimStart();

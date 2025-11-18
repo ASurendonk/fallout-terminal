@@ -4,10 +4,11 @@ $ns: computer;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background-color: lightgreen;
+    background-color: black;
+    position: relative;
 
     .#{$ns}-content {
-        transform: scale(0.2);
+        transform: scale(1);
         transition: transform 1500ms;
     }
 
@@ -18,6 +19,7 @@ $ns: computer;
     }
 
     .#{$ns}-hardware {
+        transform: rotate(-0.2deg);
         position: fixed;
         top: 0;
         left: 0;
@@ -30,14 +32,27 @@ $ns: computer;
         .#{$ns}-box {
             .#{$ns}-cut-out {
                 position: absolute;
-                top: 450px;
+                top: 63px;
                 bottom: 0;
-                left: -528px;
+                left: -1186px;
                 right: 0;
                 margin: auto;
-                transform: scale(1.45);
-                width: 1026px;
-                height: 908px;
+                width: 2400px;
+                border: 10px solid #595959;
+                border-radius: 50px;
+            }
+            .#{$ns}-off-screen {
+                position: absolute;
+                top: -241px;
+                left: -307px;
+                width: 610px;
+
+                &.on {
+                    opacity: 0;
+                }
+                &.off {
+                    opacity: 1;
+                }
             }
         }
     }
