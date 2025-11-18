@@ -1,0 +1,10 @@
+@import "../../../../App";
+
+$ns: ft-line;
+
+.#{$ns} {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: $color;
+}

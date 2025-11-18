@@ -17,7 +17,7 @@ export const PasswordInput = ({ value, onTextChange, ...rest }: PasswordInputPro
     return (
         <div className="password-input">
             <input {...rest} value={value} onChange={onChange} autoComplete="off" spellCheck="false" maxLength={12} />
-            <div className="password-input-display">{displayValue || "_"}</div>
+            <div className="password-input-display">{displayValue || " "}</div>
         </div>
     );
 }

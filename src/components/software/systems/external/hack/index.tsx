@@ -1,14 +1,14 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Utils, { Character, HackOption, HackType, WordOption } from './utils.ts';
+import Utils, { Character, HackOption, HackType, WordOption } from './utils';
 import './styles.scss';
 import { Button, Title } from 'components/software/elements';
-import { Letter } from "./letter.tsx";
+import { Letter } from "./letter";
 import { useDebouncedCallback } from "use-debounce";
 import { navigate } from "helpers";
 import { SYSTEMS } from "types";
-import { notify } from "store/mainframeSlice.ts";
-import { useDispatch } from "hooks/dispatch.ts";
-import { SoundCode } from "helpers/sounds.ts";
+import { notify } from "store/mainframeSlice";
+import { useDispatch } from "hooks/dispatch";
+import { SoundCode } from "helpers/sounds";
 
 type HistoryWord = {
     word: string;

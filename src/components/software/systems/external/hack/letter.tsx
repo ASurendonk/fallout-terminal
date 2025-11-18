@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Character } from './utils.ts';
+import { Character } from './utils';
 
 type LetterProps = {
     character: Character;

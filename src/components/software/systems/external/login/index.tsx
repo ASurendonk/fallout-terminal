@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './styles.scss';
-import { Sequencer } from 'components';
+import { Sequencer } from 'components/sequencer';
 import { Button, Title } from 'components/software/elements';
 import { navigate } from 'helpers';
 import { SYSTEMS } from 'types';
 import { PasswordInput } from "components/software/elements/passwordInput";
-import { getHackLoaded } from "store/mainframeSlice.ts";
+import { getHackLoaded } from "store/mainframeSlice";
 import { useSelector } from "react-redux";
 
 export const Login = () => {
@@ -31,17 +31,21 @@ export const Login = () => {
         passRef.current = password;
     }, [password]);
 
-    const eventFunction = useCallback((event: any) => {
-        if (event.key === 'Enter') {
-            if (passRef.current.toLowerCase() === 'adam') {
-                setNotification('> Password accepted.');
-                setTimeout(() => navigate(SYSTEMS.HOME), 1000);
-            } else {
-                setNotification('> Login failed. Try again...');
-                setTimeout(() => setNotification(''), 2000);
-            }
+    const attemptLogin = useCallback(() => {
+        if (passRef.current.toLowerCase() === 'adam') {
+            setNotification('> Password accepted.');
+            setTimeout(() => navigate(SYSTEMS.HOME), 1000);
+        } else {
+            setNotification('> Login failed. Try again...');
+            setTimeout(() => setNotification(''), 2000);
         }
     }, []);
+
+    const eventFunction = useCallback((event: any) => {
+        if (event.key === 'Enter') {
+            attemptLogin();
+        }
+    }, [attemptLogin]);
 
     useEffect(() => {
         window.addEventListener('keydown', eventFunction);
@@ -64,12 +68,15 @@ export const Login = () => {
                 <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
                 <br/>
                 <Sequencer line order={1} {...sequencerProps}>{"LOGIN ADMIN"}</Sequencer>
-                <Sequencer line spacer order={2} {...sequencerProps}>
+                <Sequencer line smSpacer order={2} {...sequencerProps}>
                     <PasswordInput value={password} onTextChange={onPasswordChange} />
+                </Sequencer>
+                <Sequencer line order={2} msDelay={100} {...sequencerProps}>
+                    <Button label="LOGIN" fullWidth onClick={() => attemptLogin()}/>
                 </Sequencer>
                 <br/>
                 <Sequencer line order={3} msDelay={100} {...sequencerProps}>
-                    <Button label="REBOOT" fullWidth onClick={() => navigate(SYSTEMS.BOOT)}/>
+                    <Button label="INFORMATION" fullWidth onClick={() => navigate(SYSTEMS.BIOS)}/>
                 </Sequencer>
                 <Sequencer line order={4} msDelay={100} {...sequencerProps}>
                     {hackLoaded ? (

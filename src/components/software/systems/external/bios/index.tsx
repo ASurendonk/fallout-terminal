@@ -4,13 +4,13 @@ import './styles.scss';
 import { SYSTEMS } from 'types';
 import { Sequencer } from 'components/sequencer';
 import { navigate } from 'helpers';
-import { Button, Title } from 'components/software/elements';
+import {Button, Line, Title} from 'components/software/elements';
 import { Notification } from "components/software/elements/notification";
-import { useDispatch } from "hooks/dispatch.ts";
-import { getColor, getHackLoaded, loadHack, notify, setColor } from "store/mainframeSlice.ts";
+import { useDispatch } from "hooks/dispatch";
+import { getColor, getHackLoaded, loadHack, notify, setColor } from "store/mainframeSlice";
 import { Slider } from "components/software/elements/slider";
-import { SoundCode } from "helpers/sounds.ts";
-import { StorageCode } from "helpers/storage.ts";
+import { SoundCode } from "helpers/sounds";
+import { StorageCode } from "helpers/storage";
 import useDebouncedEffect from "use-debounced-effect";
 
 export const Bios = () => {
@@ -64,11 +64,11 @@ export const Bios = () => {
         <div className="boot screen" onClick={onScreenClick}>
             <Title/>
             <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
-            <br/>
+            <Line />
 
             <Sequencer line order={1} {...sequencerProps}>Mainframe Ver: 02.00.02</Sequencer>
             <Sequencer line order={2} {...sequencerProps}>Mainframe Date: 03/21/1989 10:27:53</Sequencer>
-            <br/>
+            <Line />
 
             <Sequencer line order={3} {...sequencerProps}>Drives:</Sequencer>
             <Sequencer line order={4} msDelay={100} {...sequencerProps}>
@@ -77,7 +77,7 @@ export const Bios = () => {
             <Sequencer line order={5} msDelay={100} {...sequencerProps}>
                 <Button label="#### (UNKNOWN)" fullWidth onClick={onHashClick} />
             </Sequencer>
-            <br/>
+            <Line />
 
             <Sequencer line order={6} {...sequencerProps}>Color:</Sequencer>
             <Sequencer line order={7} msDelay={100} {...sequencerProps}>
@@ -93,7 +93,7 @@ export const Bios = () => {
             <div className="screen-spacer"/>
 
             <Sequencer line order={10} msDelay={100} {...sequencerProps} onComplete={onScreenClick}>
-                <Button label="DONE" fullWidth onClick={() => navigate(SYSTEMS.BOOT)}/>
+                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
             </Sequencer>
 
             <Notification/>

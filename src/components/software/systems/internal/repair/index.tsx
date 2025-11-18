@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { Button, Title } from "components/software/elements";
+import {Button, Line, Title} from "components/software/elements";
 import { Sequencer } from "components/sequencer";
 import { navigate } from "helpers";
 import { SYSTEMS } from "types";
@@ -23,14 +23,17 @@ export const Repair = () => {
     return (
         <div className="home screen" onClick={onScreenClick}>
             <Title loggedIn/>
-            <div>{"HOME > REPAIR"}</div>
-            <br/>
+
+            <Line />
+            {"HOME > REPAIR (WORK_IN_PROGRESS)"}
+            <Line />
 
             <RepairGame />
 
             <div className="screen-spacer"/>
+
             <Sequencer line order={0} msDelay={100} {...sequencerProps}>
-                <Button label="DONE" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
             </Sequencer>
         </div>
     );

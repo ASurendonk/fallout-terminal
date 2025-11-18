@@ -2,7 +2,7 @@ import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'reac
 import ComputerCutOut from 'assets/images/computer/background.png';
 import ComputerOffScreen from 'assets/images/computer/screen.png';
 import './styles.scss';
-import { CalculateScale } from 'helpers/index';
+import { CalculateScale } from 'helpers';
 import { Power } from '../power';
 import { AudioManager, sounds } from 'helpers/sounds';
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ export const Computer = ({children}: ComputerProps) => {
     const power = useSelector(getPower);
     const dispatch = useDispatch();
 
-    const [sittingScale, setSittingScale] = useState(0.5);
+    const [sittingScale, setSittingScale] = useState(0.9); // default sitting scale
 
     const updateScale = useCallback((delta?: number) => {
         delta = delta ? delta : 0;

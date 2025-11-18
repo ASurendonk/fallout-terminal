@@ -8,6 +8,7 @@ export interface SequencerProps {
     className?: string;
     line?: boolean;
     spacer?: boolean;
+    smSpacer?: boolean;
     order?: number;
     index?: number;
     onComplete?(index: number): void;
@@ -23,7 +24,7 @@ const isValidNumber: (number?: any) => boolean = (number) => {
     return number !== undefined && !isNaN(number);
 }
 
-export const Sequencer = ({children, className, line, spacer, onComplete, order, index, skip, reserveSpace, art, speed = 20, volume = 0.01, msDelay}: SequencerProps) => {
+export const Sequencer = ({children, className, line, spacer, smSpacer, onComplete, order, index, skip, reserveSpace, art, speed = 20, volume = 0.01, msDelay}: SequencerProps) => {
 
     const power = useSelector(getPower);
     const [output, setOutput] = useState<string | React.ReactNode>('');
@@ -109,10 +110,10 @@ export const Sequencer = ({children, className, line, spacer, onComplete, order,
         return <pre style={{ fontFamily: "monospace" }}>{output}</pre>;
     }
 
-    if (line || spacer || className) {
+    if (line || spacer || smSpacer || className) {
         return (
             <pre style={{ whiteSpace: "pre-line" }}>
-                <div className={`${line && 'line'} ${spacer && 'spacer'} ${className}`}>
+                <div className={`${line && 'line'} ${spacer && 'spacer'} ${smSpacer && 'smSpacer'} ${className}`}>
                     {reserveSpace && !output && <pre> </pre>}
                     {output}
                 </div>

@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import './styles.scss';
-import { Button, Title } from 'components/software/elements';
+import {Button, Line, Title} from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
-import { SystemDataContext } from "components/software/elements/context/context.tsx";
+import { SystemDataContext } from "components/software/elements/context/context";
 
 export const Entries = () => {
 
@@ -36,8 +36,10 @@ export const Entries = () => {
     return (
         <div className="entries screen" onClick={onScreenClick}>
             <Title loggedIn />
-            <div>{"HOME > LOGS"}</div>
-            <br/>
+
+            <Line />
+            {"HOME > LOGS!"}
+            <Line />
 
             <Sequencer line order={0} msDelay={100} {...sequencerProps}>
                 <Button label="SECURITY WARNING" fullWidth onClick={onClickLog}/>
@@ -50,7 +52,7 @@ export const Entries = () => {
             <div className="screen-spacer" />
 
             <Sequencer line order={2} {...sequencerProps}>
-                <Button label="DONE" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
             </Sequencer>
         </div>
     );

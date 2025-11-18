@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
-import { Button, Title } from 'components/software/elements';
+import {Button, Line, Title} from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
@@ -23,13 +23,13 @@ export const Map = () => {
     return (
         <div className="local-map screen" onClick={onScreenClick}>
             <Title loggedIn/>
-            <div>{"HOME > MAP"}</div>
-            <br/>
+
+            <Line />
+            {"HOME > MAP"}
 
             <Sequencer art order={0} {...sequencerProps}>{artMap}</Sequencer>
 
-            <br/>
-            <br/>
+            <div className="screen-spacer"/>
 
             <Sequencer line order={1} {...sequencerProps}>
                 <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>

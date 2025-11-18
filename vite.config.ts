@@ -9,6 +9,7 @@ const root = resolve(__dirname, "src");
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/fallout-terminal/",
   resolve: {
     alias: {
       "components": resolve(root, "components"),

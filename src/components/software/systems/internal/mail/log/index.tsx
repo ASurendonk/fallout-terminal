@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import './styles.scss';
-import { Button, Title } from 'components/software/elements';
+import {Button, Line, Title} from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
-import { SystemDataContext } from "components/software/elements/context/context.tsx";
+import { SystemDataContext } from "components/software/elements/context/context";
 
 export const Log = () => {
 
@@ -26,17 +26,21 @@ export const Log = () => {
     return (
         <div className="log screen" onClick={onScreenClick}>
             <Title loggedIn />
-            <div>{"HOME > LOGS > LOG"}</div>
-            <br/>
+
+            <Line />
+            {"HOME > LOGS > LOG"}
+            <Line />
+            <Line draw />
 
             <Sequencer line order={0} {...sequencerProps}>
                 {systemData?.data ?? ""}
             </Sequencer>
+            <Line draw />
 
             <div className="screen-spacer"/>
 
             <Sequencer line order={1} {...sequencerProps}>
-                <Button label="DONE" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
+                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
             </Sequencer>
         </div>
     );
