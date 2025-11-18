@@ -1,6 +1,6 @@
-import { SYSTEMS } from 'types/index';
-import { store } from 'store/index.ts';
-import { boot } from 'store/mainframeSlice.ts';
+import { SYSTEMS } from 'types';
+import { store } from 'store';
+import { boot } from 'store/mainframeSlice';
 
 // these represent the content size to scale
 const width = 920;

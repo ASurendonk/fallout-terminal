@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from "react-redux";
-import { getPower } from "store/mainframeSlice.ts";
-import { SoundCode } from "helpers/sounds.ts";
+import { getPower } from "store/mainframeSlice";
+import { SoundCode } from "helpers/sounds";
 
 export interface SequencerProps {
     children: string | React.ReactNode;

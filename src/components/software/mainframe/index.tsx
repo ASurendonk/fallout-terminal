@@ -1,32 +1,25 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
-import { Boot, Login, Home, Bios, Map, Hack } from '../systems';
+import { Boot } from '../systems/boot';
+import { Login } from '../systems/login';
+import { Home } from '../systems/home';
+import { Bios } from '../systems/bios';
+import { Map } from '../systems/map';
+import { Hack } from '../systems/hack';
 import  useDebouncedEffect  from  'use-debounced-effect';
-import { Screen } from 'components/software';
-import { CalculateScale } from 'helpers/index';
+import { Screen } from 'components/software/screen';
+import { CalculateScale } from 'helpers';
 import './styles.scss';
 import { useSelector } from "react-redux";
-import { RootState } from "store/index";
+import { RootState } from "store";
 import { Log } from "components/software/systems/log";
 import { Entries } from "components/software/systems/entries";
-import { SystemContext } from "components/software/elements/context/context.tsx";
+import { SystemContext } from "components/software/elements/context/context";
 import { Repair } from "components/software/systems/repair";
 
 // 20 lines
 // 54 characters
 // 1080 total
 // █
-
-const Systems = {
-    bios: <Bios />,
-    boot: <Boot />,
-    login: <Login />,
-    hack: <Hack />,
-    home: <Home />,
-    map: <Map />,
-    entries: <Entries />,
-    log: <Log />,
-    repair: <Repair />,
-}
 
 export const MainFrame = () => {
     const [system, setSystem] = useState<React.ReactNode | undefined>();
@@ -46,15 +39,30 @@ export const MainFrame = () => {
         window.addEventListener('resize', scaleMainframe);
     }, [scaleMainframe]);
 
+    const renderSystem = useCallback(() => {
+        switch(systemName) {
+            case 'bios': return <Bios />;
+            case 'boot': return <Boot />;
+            case 'login': return <Login />;
+            case 'hack': return <Hack />;
+            case 'home': return <Home />;
+            case 'map': return <Map />;
+            case 'entries': return <Entries />;
+            case 'log': return <Log />;
+            case 'repair': return <Repair />;
+            default: return null;
+        }
+    }, [systemName]);
+
     useEffect(() => {
         setTimeout(() => {
             if (power) {
-                setSystem(Systems[systemName]);
+                setSystem(renderSystem());
             } else {
                 setSystem(undefined);
             }
         }, 100);
-    }, [power, systemName]);
+    }, [power, systemName, renderSystem]);
 
     useDebouncedEffect(() => {
         if (power && color) {

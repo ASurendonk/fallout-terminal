@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import './styles.scss';
 import { Button, Title } from 'components/software/elements';
-import { SYSTEMS } from 'types/index';
-import { navigate } from 'helpers/index';
+import { SYSTEMS } from 'types';
+import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
-import { SystemDataContext } from "components/software/elements/context/context.tsx";
+import { SystemDataContext } from "components/software/elements/context/context";
 
 export const Log = () => {
 

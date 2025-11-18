@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Sequencer } from "components/sequencer";
-import RepairUtils, { ErrorCharacter, RepairCharacter } from "components/software/games/repair/utils.ts";
+import RepairUtils, { ErrorCharacter, RepairCharacter } from "components/software/games/repair/utils";
 
 import "./styles.scss";
 import { Button } from "components/software/elements";
-import { navigate } from "helpers/index.ts";
-import { SYSTEMS } from "types/index.ts";
-import { SoundCode } from "helpers/sounds.ts";
+import { navigate } from "helpers";
+import { SYSTEMS } from "types";
+import { SoundCode } from "helpers/sounds";
 
 const errorCount = 8;
 const lineCount = 12;

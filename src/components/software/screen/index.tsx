@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.scss';
 
 import { useSelector } from "react-redux";
-import { getPower } from "store/mainframeSlice.ts";
+import { getPower } from "store/mainframeSlice";
 import ComputerOffScreen from "assets/images/computer/screen.png";
 
 type SystemProps = {

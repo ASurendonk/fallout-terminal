@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
-import { Sequencer } from 'components/index.ts';
+import { Sequencer } from 'components/sequencer';
 import { Button, Title } from 'components/software/elements';
-import { navigate } from 'helpers/index.ts';
-import { SYSTEMS } from 'types/index.ts';
+import { navigate } from 'helpers';
+import { SYSTEMS } from 'types';
 import { Notification } from "components/software/elements/notification";
 
 export const Home = () => {
@@ -25,7 +25,7 @@ export const Home = () => {
         <div className="home screen" onClick={onScreenClick}>
             <Title loggedIn/>
             <br/>
-            <br/>
+            <br/>hi
             <div>{"HOME"}</div>
             <br/>
 

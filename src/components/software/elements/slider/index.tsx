@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import './styles.scss';
-import { Color } from "helpers/globals.ts";
-import { SoundCode } from "helpers/sounds.ts";
+import { Color } from "helpers/globals";
+import { SoundCode } from "helpers/sounds";
 
 type SliderProps = {
     label: React.ReactNode;

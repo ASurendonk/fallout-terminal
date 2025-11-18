@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import { useSelector } from "react-redux";
-import { getNotification } from "store/mainframeSlice.ts";
+import { getNotification } from "store/mainframeSlice";
 import { Sequencer } from "components/sequencer";
 
 export const Notification = () => {

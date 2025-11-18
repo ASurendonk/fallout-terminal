@@ -2,7 +2,7 @@ import "./App.scss";
 
 import { Provider } from "react-redux";
 
-import { store } from "./store/index.ts";
+import { store } from "./store";
 import { Computer, MainFrame } from "./components";
 
 function App() {

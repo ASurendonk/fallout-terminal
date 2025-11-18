@@ -6,9 +6,9 @@ import { CalculateScale } from 'helpers/index';
 import { Power } from '../power';
 import { AudioManager, sounds } from 'helpers/sounds';
 import { useSelector } from "react-redux";
-import { getPower, setColor } from "store/mainframeSlice.ts";
-import { StorageCode, StorageManager } from "helpers/storage.ts";
-import { useDispatch } from "hooks/dispatch.ts";
+import { getPower, setColor } from "store/mainframeSlice";
+import { StorageCode, StorageManager } from "helpers/storage";
+import { useDispatch } from "hooks/dispatch";
 
 type ComputerProps = {
     children?: ReactNode;

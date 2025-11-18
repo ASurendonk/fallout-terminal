@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
 import { Button, Title } from 'components/software/elements';
-import { SYSTEMS } from 'types/index';
-import { navigate } from 'helpers/index';
+import { SYSTEMS } from 'types';
+import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
 
 export const Map = () => {

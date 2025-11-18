@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './styles.scss';
-import { SYSTEMS } from 'types/index';
+import { SYSTEMS } from 'types';
 import { Sequencer } from 'components/sequencer';
-import { navigate } from 'helpers/index';
+import { navigate } from 'helpers';
 import { Button, Title } from 'components/software/elements';
 
 export const Boot = () => {

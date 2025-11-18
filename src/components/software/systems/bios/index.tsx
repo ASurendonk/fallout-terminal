@@ -1,16 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useSelector } from "react-redux";
 import './styles.scss';
-import { SYSTEMS } from 'types/index';
+import { SYSTEMS } from 'types';
 import { Sequencer } from 'components/sequencer';
-import { navigate } from 'helpers/index';
+import { navigate } from 'helpers';
 import { Button, Title } from 'components/software/elements';
 import { Notification } from "components/software/elements/notification";
-import { useDispatch } from "hooks/dispatch.ts";
-import { getColor, getHackLoaded, loadHack, notify, setColor } from "store/mainframeSlice.ts";
+import { useDispatch } from "hooks/dispatch";
+import { getColor, getHackLoaded, loadHack, notify, setColor } from "store/mainframeSlice";
 import { Slider } from "components/software/elements/slider";
-import { SoundCode } from "helpers/sounds.ts";
-import { StorageCode } from "helpers/storage.ts";
+import { SoundCode } from "helpers/sounds";
+import { StorageCode } from "helpers/storage";
 import useDebouncedEffect from "use-debounced-effect";
 
 export const Bios = () => {

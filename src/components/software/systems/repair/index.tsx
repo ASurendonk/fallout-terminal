@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { Button, Title } from "components/software/elements";
 import { Sequencer } from "components/sequencer";
-import { navigate } from "helpers/index.ts";
-import { SYSTEMS } from "types/index.ts";
+import { navigate } from "helpers";
+import { SYSTEMS } from "types";
 import { RepairGame } from "components/software/games/repair";
 
 export const Repair = () => {

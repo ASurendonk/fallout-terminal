@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mainframeReducer from "./mainframeSlice.ts";
+import mainframeReducer from "./mainframeSlice";
 
 export const store = configureStore({
     reducer: {

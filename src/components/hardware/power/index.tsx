@@ -2,8 +2,8 @@ import React, {useCallback} from 'react';
 import './styles.scss';
 import ButtonCutOut from 'assets/images/computer/button.png';
 import { useDispatch, useSelector } from "react-redux";
-import { getPower, powerOff, powerOn } from "store/mainframeSlice.ts";
-import { SoundCode } from "helpers/sounds.ts";
+import { getPower, powerOff, powerOn } from "store/mainframeSlice";
+import { SoundCode } from "helpers/sounds";
 
 export const Power = () => {
     const power = useSelector(getPower);

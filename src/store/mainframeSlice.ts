@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SYSTEMS } from "types/index";
-import { RootState } from "store/index.ts";
+import { SYSTEMS } from "types";
+import { RootState } from "store";
 
 interface MainframeState {
     power: boolean;
