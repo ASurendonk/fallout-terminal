@@ -8,17 +8,29 @@ $ns: power;
     pointer-events: all;
 
     .#{$ns}-button {
-        width: 47px;
+        width: 48px;
+        height: 48px;
         left: 4px;
         position: relative;
         top: -2px;
         cursor: pointer;
+        border-radius: 50%;
 
         &.on {
-            // nothing
+            top: 0;
+            height: 47px;
         }
         &.off {
-            opacity: 0;
+            opacity: 1;
+            //box-shadow: rgba(37, 255, 22, 0.69) 0 0 10px 5px;
+            animation: power-attention 2s infinite;
+            //border: 1px solid red;
+        }
+
+        @keyframes power-attention {
+            0%{box-shadow: rgba(37, 255, 22, 0.69) 0 0 0 -5px}
+            50%{box-shadow: rgba(37, 255, 22, 0.69) 0 0 5px 5px}
+            100%{box-shadow: rgba(37, 255, 22, 0.69) 0 0 0 -5px}
         }
     }
 }

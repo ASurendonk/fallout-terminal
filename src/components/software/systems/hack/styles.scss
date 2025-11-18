@@ -122,6 +122,9 @@ $char-width: 9.5px;
     .#{$ns}-block_two {
         animation: __load-in4 3s steps(16);
     }
+    .#{$ns}-input {
+      -webkit-text-fill-color: $color;
+    }
 }
 
 @keyframes __load-in1 {

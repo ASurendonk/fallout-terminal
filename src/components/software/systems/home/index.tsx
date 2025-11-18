@@ -24,6 +24,8 @@ export const Home = () => {
     return (
         <div className="home screen" onClick={onScreenClick}>
             <Title loggedIn/>
+            <br/>
+            <br/>
             <div>{"HOME"}</div>
             <br/>
 

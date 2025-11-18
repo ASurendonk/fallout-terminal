@@ -20,7 +20,7 @@ const initialState: MainframeState = {
     system: SYSTEMS.BOOT,
     title: "Welcome to ROBCO Industries (TM) Termlink",
     notification: "",
-    hackLoaded: false,
+    hackLoaded: true,
     color: {
         red: 30,
         green: 138,

@@ -32,10 +32,9 @@ $ns: computer;
         .#{$ns}-box {
             .#{$ns}-cut-out {
                 position: absolute;
-                top: 63px;
-                bottom: 0;
-                left: -1186px;
-                right: 0;
+                top: 50%;
+                left: 50%;
+                transform: translate(-49%, -45.3%);
                 margin: auto;
                 width: 2400px;
                 border: 10px solid #595959;
@@ -43,7 +42,7 @@ $ns: computer;
             }
             .#{$ns}-off-screen {
                 position: absolute;
-                top: -241px;
+                top: -240px;
                 left: -307px;
                 width: 610px;
 

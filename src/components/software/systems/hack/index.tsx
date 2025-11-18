@@ -402,6 +402,7 @@ export const Hack = (props: HackProps) => {
                                 value={userInput}
                                 onChange={event => setUserInput(event.target.value)}
                                 autoComplete="off"
+                                className="hack-input"
                             />
                         </form>
                     </div>
