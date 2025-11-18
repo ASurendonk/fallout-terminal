@@ -1,13 +1,16 @@
 {
   "name": "fallout-terminal",
+  "homepage": "https://asurendonk.github.io/fallout-terminal",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
@@ -28,6 +31,7 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "gh-pages": "^6.3.0",
     "sass": "^1.70.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
