@@ -4,7 +4,7 @@ import { Button, Title } from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
 import { Sequencer } from "components/sequencer";
-import { SystemDataContext } from "components/software/elements/context/context";
+import { SystemDataContext } from "components/software/elements/context/context.tsx";
 
 export const Entries = () => {
 

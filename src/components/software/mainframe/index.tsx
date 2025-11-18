@@ -1,20 +1,20 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
-import { Boot } from '../systems/boot';
-import { Login } from '../systems/login';
-import { Home } from '../systems/home';
-import { Bios } from '../systems/bios';
-import { Map } from '../systems/map';
-import { Hack } from '../systems/hack';
+import { Boot } from '../systems/external/boot';
+import { Login } from '../systems/external/login';
+import { Home } from '../systems/internal/home';
+import { Bios } from '../systems/external/bios';
+import { Map } from '../systems/internal/map';
+import { Hack } from '../systems/external/hack';
 import  useDebouncedEffect  from  'use-debounced-effect';
 import { Screen } from 'components/software/screen';
 import { CalculateScale } from 'helpers';
 import './styles.scss';
 import { useSelector } from "react-redux";
 import { RootState } from "store";
-import { Log } from "components/software/systems/log";
-import { Entries } from "components/software/systems/entries";
+import { Log } from "components/software/systems/internal/mail/log";
+import { Entries } from "components/software/systems/internal/mail";
 import { SystemContext } from "components/software/elements/context/context";
-import { Repair } from "components/software/systems/repair";
+import { Repair } from "components/software/systems/internal/repair";
 
 // 20 lines
 // 54 characters

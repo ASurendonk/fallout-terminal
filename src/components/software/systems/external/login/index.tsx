@@ -5,7 +5,7 @@ import { Button, Title } from 'components/software/elements';
 import { navigate } from 'helpers';
 import { SYSTEMS } from 'types';
 import { PasswordInput } from "components/software/elements/passwordInput";
-import { getHackLoaded } from "store/mainframeSlice";
+import { getHackLoaded } from "store/mainframeSlice.ts";
 import { useSelector } from "react-redux";
 
 export const Login = () => {
