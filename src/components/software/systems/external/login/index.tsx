@@ -80,7 +80,7 @@ export const Login = () => {
                 </Sequencer>
                 <Sequencer line order={4} msDelay={100} {...sequencerProps}>
                     {hackLoaded ? (
-                        <Button label="####.EXE/RUN" fullWidth onClick={() => navigate(SYSTEMS.HACK)}/>
+                        <Button label="/HACK/" fullWidth onClick={() => navigate(SYSTEMS.HACK)}/>
                     ) : ""}
                 </Sequencer>
             </div>

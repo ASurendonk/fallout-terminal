@@ -39,11 +39,11 @@ export const Bios = () => {
 
     const onHashClick = useCallback(() => {
         if (hackLoaded) {
-            dispatch(notify("#### Already Loaded..."));
+            dispatch(notify("/HACK/ Already Loaded..."));
             return;
         }
         dispatch(loadHack());
-        dispatch(notify("#### Loaded..."));
+        dispatch(notify("/HACK/ Loaded..."));
         window.audioManager.play(SoundCode.slot, 0.5);
     }, [hackLoaded, dispatch]);
 
@@ -75,7 +75,7 @@ export const Bios = () => {
                 <Button label="MAIN" fullWidth onClick={() => dispatch(notify("MAIN Already Loaded..."))} />
             </Sequencer>
             <Sequencer line order={5} msDelay={100} {...sequencerProps}>
-                <Button label="#### (UNKNOWN)" fullWidth onClick={onHashClick} />
+                <Button label="/HACK/ (UNKNOWN)" fullWidth onClick={onHashClick} />
             </Sequencer>
             <Line />
 

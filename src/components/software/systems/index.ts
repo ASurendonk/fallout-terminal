@@ -1,4 +1,4 @@
-export * from './external/bios';
+export * from './external/information';
 export * from './external/boot';
 export * from './external/login';
 export * from './internal/home';

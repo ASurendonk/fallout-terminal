@@ -65,7 +65,7 @@ export const Hack = (props: HackProps) => {
                 timer = setTimeout(() => {
                     window.audioManager.play(SoundCode.tick, 0.01);
                     playTick(index + 1);
-                }, 47);
+                }, 41);
             }
         };
         setTimeout(() => playTick(0), 0);

@@ -8,54 +8,58 @@ import { Notification } from "components/software/elements/notification";
 
 export const Home = () => {
 
-    const [index, setIndex] = useState(0);
-    const [skip, setSkip] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [skip, setSkip] = useState(false);
 
-    const sequencerProps = useMemo(() => ({
-        onComplete: setIndex,
-        index: index,
-        skip: skip,
-    }), [setIndex, index, skip]);
+  const sequencerProps = useMemo(() => ({
+    onComplete: setIndex,
+    index: index,
+    skip: skip,
+  }), [setIndex, index, skip]);
 
-    const onScreenClick = useCallback(() => {
-        setSkip(true);
-    }, []);
+  const onScreenClick = useCallback(() => {
+    setSkip(true);
+  }, []);
 
-    return (
-        <div className="home screen" onClick={onScreenClick}>
-            <Title loggedIn/>
+  return (
+    <div className="home screen" onClick={onScreenClick}>
+      <Title loggedIn/>
 
-            <Line />
-            HOME
-            <Line />
+      <Line />
+      HOME
+      <Line />
 
-            <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
-            <Line />
+      <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
+      <Line />
 
-            <Sequencer order={1} {...sequencerProps}>{"Welcome VD#1514"}</Sequencer>
-            <Line />
+      <Sequencer order={1} {...sequencerProps}>{"Welcome VD#1514"}</Sequencer>
+      <Line />
 
-            <Sequencer line order={2} msDelay={100} {...sequencerProps}>
-                <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
-            </Sequencer>
+      <Sequencer line order={2} msDelay={100} {...sequencerProps}>
+        <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
+      </Sequencer>
 
-            <Sequencer line order={3} msDelay={100} {...sequencerProps}>
-                <Button label="MAP" fullWidth onClick={() => navigate(SYSTEMS.MAP)}/>
-            </Sequencer>
+      <Sequencer line order={3} msDelay={100} {...sequencerProps}>
+        <Button label="MAP" fullWidth onClick={() => navigate(SYSTEMS.MAP)}/>
+      </Sequencer>
 
-            <Sequencer line order={4} msDelay={100} {...sequencerProps}>
-                <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>
-            </Sequencer>
+      <Sequencer line order={4} msDelay={100} {...sequencerProps}>
+        <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>
+      </Sequencer>
 
-            <div className="screen-spacer"/>
+      <Sequencer line order={5} msDelay={100} {...sequencerProps}>
+        <Button label="MAINTENANCE" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
+      </Sequencer>
 
-            <Sequencer line order={5} msDelay={100} {...sequencerProps}>
-                <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
-            </Sequencer>
+      <div className="screen-spacer"/>
 
-            <Notification/>
-        </div>
-    );
+      <Sequencer line order={6} msDelay={100} {...sequencerProps}>
+        <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
+      </Sequencer>
+
+      <Notification/>
+    </div>
+  );
 }
 
 // Vault-Tec: Keeping the fallout, out.

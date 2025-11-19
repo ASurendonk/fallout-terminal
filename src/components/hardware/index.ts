@@ -1,2 +1,2 @@
 export * from './computer';
-export * from './loading';
+export * from './loadingOverlay';

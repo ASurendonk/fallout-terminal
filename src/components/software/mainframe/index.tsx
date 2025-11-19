@@ -1,10 +1,10 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
-import { Boot } from '../systems/external/boot';
-import { Login } from '../systems/external/login';
-import { Home } from '../systems/internal/home';
-import { Bios } from '../systems/external/bios';
-import { Map } from '../systems/internal/map';
-import { Hack } from '../systems/external/hack';
+import { Boot } from 'components/software';
+import { Login } from 'components/software';
+import { Home } from 'components/software';
+import { Bios } from 'components/software';
+import { Map } from 'components/software';
+import { Hack } from 'components/software';
 import  useDebouncedEffect  from  'use-debounced-effect';
 import { Screen } from 'components/software/screen';
 import { CalculateScale } from 'helpers';
@@ -15,6 +15,8 @@ import { Log } from "components/software/systems/internal/mail/log";
 import { Entries } from "components/software/systems/internal/mail";
 import { SystemContext } from "components/software/elements/context/context";
 import { Repair } from "components/software/systems/internal/repair";
+import { Maintenance } from "components/software/systems/internal/maintenance";
+import {Lights} from "components/software/systems/internal/maintenance/lights";
 
 // 20 lines
 // 54 characters
@@ -22,93 +24,95 @@ import { Repair } from "components/software/systems/internal/repair";
 // █
 
 export const MainFrame = () => {
-    const [system, setSystem] = useState<React.ReactNode | undefined>();
-    const [scale, setScale] = useState(0);
-    const ref = useRef<any>();
-    const { power, system: systemName, color } = useSelector((state: RootState) => state.mainframe);
-    const [cursor, setCursor] = useState<string>();
+  const [system, setSystem] = useState<React.ReactNode | undefined>();
+  const [scale, setScale] = useState(0);
+  const ref = useRef<any>();
+  const { power, system: systemName, color } = useSelector((state: RootState) => state.mainframe);
+  const [cursor, setCursor] = useState<string>();
 
-    const scaleMainframe = useCallback(() => {
-        const mf = ref.current;
-        const calculatedScale = CalculateScale(mf.clientHeight, mf.clientWidth);
-        setScale(calculatedScale);
-    }, []);
+  const scaleMainframe = useCallback(() => {
+    const mf = ref.current;
+    const calculatedScale = CalculateScale(mf.clientHeight, mf.clientWidth);
+    setScale(calculatedScale);
+  }, []);
 
-    useEffect(() => {
-        scaleMainframe();
-        window.addEventListener('resize', scaleMainframe);
-    }, [scaleMainframe]);
+  useEffect(() => {
+    scaleMainframe();
+    window.addEventListener('resize', scaleMainframe);
+  }, [scaleMainframe]);
 
-    const renderSystem = useCallback(() => {
-        switch(systemName) {
-            case 'bios': return <Bios />;
-            case 'boot': return <Boot />;
-            case 'login': return <Login />;
-            case 'hack': return <Hack />;
-            case 'home': return <Home />;
-            case 'map': return <Map />;
-            case 'entries': return <Entries />;
-            case 'log': return <Log />;
-            case 'repair': return <Repair />;
-            default: return null;
-        }
-    }, [systemName]);
+  const renderSystem = useCallback(() => {
+    switch(systemName) {
+      case 'bios': return <Bios />;
+      case 'boot': return <Boot />;
+      case 'login': return <Login />;
+      case 'hack': return <Hack />;
+      case 'home': return <Home />;
+      case 'map': return <Map />;
+      case 'entries': return <Entries />;
+      case 'log': return <Log />;
+      case 'repair': return <Repair />;
+      case 'maintenance': return <Maintenance />;
+      case 'lights': return <Lights />;
+      default: return null;
+    }
+  }, [systemName]);
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (power) {
-                setSystem(renderSystem());
-            } else {
-                setSystem(undefined);
-            }
-        }, 100);
-    }, [power, systemName, renderSystem]);
+  useEffect(() => {
+    setTimeout(() => {
+      if (power) {
+        setSystem(renderSystem());
+      } else {
+        setSystem(undefined);
+      }
+    }, 100);
+  }, [power, systemName, renderSystem]);
 
-    useDebouncedEffect(() => {
-        if (power && color) {
-            setCursor(makeCursor(`rgb(${color.red},${color.green},${color.blue})`));
-        }
-    }, 150, [color, power]);
+  useDebouncedEffect(() => {
+    if (power && color) {
+      setCursor(makeCursor(`rgb(${color.red},${color.green},${color.blue})`));
+    }
+  }, 150, [color, power]);
 
-    return (
-        <div ref={ref} className="mainframe">
-            <div className={`mainframe-content ${power ? "on" : "off"}`} style={{ transform: `translate(-50%, -50%) scale(${scale})`, cursor }}>
-                <SystemContext>
-                    <Screen>
-                        {system}
-                    </Screen>
-                </SystemContext>
-            </div>
-        </div>
-    );
+  return (
+    <div ref={ref} className="mainframe">
+      <div className={`mainframe-content ${power ? "on" : "off"}`} style={{ transform: `translate(-50%, -50%) scale(${scale})`, cursor }}>
+        <SystemContext>
+          <Screen>
+            {system}
+          </Screen>
+        </SystemContext>
+      </div>
+    </div>
+  );
 }
 
 function makeCursor(color: string) {
 
-    const cursor = document.createElement('canvas');
-    const ctx = cursor.getContext('2d');
+  const cursor = document.createElement('canvas');
+  const ctx = cursor.getContext('2d');
 
-    if (!ctx) {
-        return;
-    }
+  if (!ctx) {
+    return;
+  }
 
-    cursor.width = 22;
-    cursor.height = 22;
+  cursor.width = 22;
+  cursor.height = 22;
 
-    ctx.strokeStyle = color;
+  ctx.strokeStyle = color;
 
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(22, 11);
-    ctx.lineTo(11, 22);
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(22, 11);
+  ctx.lineTo(11, 22);
+  ctx.closePath();
 
-    ctx.fillStyle = color;
-    ctx.fill();
+  ctx.fillStyle = color;
+  ctx.fill();
 
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 1;
-    ctx.stroke();
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 1;
+  ctx.stroke();
 
-    return 'url(' + cursor.toDataURL() + '), auto';
+  return 'url(' + cursor.toDataURL() + '), auto';
 }

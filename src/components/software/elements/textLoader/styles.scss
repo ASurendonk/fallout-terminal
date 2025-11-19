@@ -1,0 +1,17 @@
+@use "sass:color";
+@import "../../../../App";
+
+$ns: loader;
+
+.#{$ns} {
+  width: 1em;
+  text-align: center;
+  font-family: $share-tech;
+  font-size: 18px;
+  font-weight: bold;
+  color: $color;
+  text-shadow: 0 0 10px $color;
+  &.#{$ns}-lg {
+    font-size: 30px;
+  }
+}

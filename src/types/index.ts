@@ -8,4 +8,6 @@ export enum SYSTEMS {
     ENTRIES = 'entries',
     LOG = 'log',
     REPAIR = 'repair',
+    MAINTENANCE = 'maintenance',
+    LIGHTS = 'lights',
 }

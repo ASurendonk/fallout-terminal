@@ -38,7 +38,7 @@ export const Entries = () => {
             <Title loggedIn />
 
             <Line />
-            {"HOME > LOGS!"}
+            {"HOME > LOGS"}
             <Line />
 
             <Sequencer line order={0} msDelay={100} {...sequencerProps}>

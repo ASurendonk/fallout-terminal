@@ -5,27 +5,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPower, powerOff, powerOn } from "store/mainframeSlice";
 import { SoundCode } from "helpers/sounds";
 
-export const Power = () => {
-    const power = useSelector(getPower);
-    const dispatch = useDispatch();
+type PowerProps = {
+  button?: boolean;
+  glow?: boolean;
+};
 
-    const onButtonClick = useCallback(() => {
-        if (power) {
-            window.audioManager.play(SoundCode.tick, 0.1);
-            dispatch(powerOff());
-        } else {
-            window.audioManager.play(SoundCode.tick, 0.5);
-            dispatch(powerOn());
-        }
-    }, [power, dispatch]);
+export const Power = ({ button, glow }: PowerProps) => {
+  const power = useSelector(getPower);
+  const dispatch = useDispatch();
 
-    const onMouseDown = useCallback(() => {
-        window.audioManager.play(SoundCode.tick, 0.1);
-    }, []);
+  const onButtonClick = useCallback(() => {
+    if (power) {
+      window.audioManager.play(SoundCode.tick, 0.1);
+      dispatch(powerOff());
+    } else {
+      window.audioManager.play(SoundCode.tick, 0.5);
+      dispatch(powerOn());
+    }
+  }, [power, dispatch]);
 
-    return (
-        <div className="power" onClick={onButtonClick} onMouseDown={onMouseDown}>
-            <img className={`power-button ${power ? 'on' : 'off'}`} src={ButtonCutOut} alt="power button" />
-        </div>
-    );
+  const onMouseDown = useCallback(() => {
+    window.audioManager.play(SoundCode.tick, 0.1);
+  }, []);
+
+  return (
+    <div className={`power ${button ? 'power-button' : ''}`} onClick={onButtonClick} onMouseDown={onMouseDown}>
+      <div className="power-wrapper">
+        {button && (
+          <img
+            className={`power-button ${power ? 'on' : 'off'}`}
+            src={ButtonCutOut}
+            alt="power button"
+          />
+        )}
+        {glow && !power && (
+          <>
+            <div className="power-glow white"></div>
+            <div className="power-glow color"></div>
+          </>
+        )}
+      </div>
+    </div>
+  );
 }

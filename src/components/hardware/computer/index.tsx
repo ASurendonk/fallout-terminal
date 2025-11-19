@@ -4,12 +4,13 @@ import ComputerOffScreen from 'assets/images/computer/screen.png';
 import './styles.scss';
 import { CalculateScale } from 'helpers';
 import { Power } from '../power';
-import { LoadingOverlay } from '../loading';
+import { LoadingOverlay } from '../loadingOverlay';
 import { AudioManager, sounds } from 'helpers/sounds';
 import { useSelector } from "react-redux";
-import { getPower, setColor } from "store/mainframeSlice";
+import {getLight, getPower, setColor} from "store/mainframeSlice";
 import { StorageCode, StorageManager } from "helpers/storage";
 import { useDispatch } from "hooks/dispatch";
+import {RootState} from "store";
 
 type ComputerProps = {
     children?: ReactNode;
@@ -19,9 +20,10 @@ export const Computer = ({children}: ComputerProps) => {
     const [scale, setScale] = useState(0);
     const ref = useRef<any>();
     const power = useSelector(getPower);
+    const light = useSelector(getLight);
     const dispatch = useDispatch();
 
-    const [sittingScale, setSittingScale] = useState(0.9); // default sitting scale
+  const [sittingScale, setSittingScale] = useState(0.9); // default sitting scale
     const [isLoading, setIsLoading] = useState(true);
 
     const updateScale = useCallback((delta?: number) => {
@@ -73,6 +75,10 @@ export const Computer = ({children}: ComputerProps) => {
     }, [dispatch]);
 
     useEffect(() => {
+        // storage - initialize and load state first so color is available
+        window.storageManager = new StorageManager();
+        loadState();
+
         // preload the background image
         const img = new Image();
         img.src = ComputerCutOut;
@@ -88,10 +94,6 @@ export const Computer = ({children}: ComputerProps) => {
         audioManager.loadSounds(sounds).then(() => {
             window.audioManager = audioManager;
         });
-
-        // storage
-        window.storageManager = new StorageManager();
-        loadState()
     }, [loadState]);
 
     return (
@@ -100,11 +102,25 @@ export const Computer = ({children}: ComputerProps) => {
             <div className="computer sitting" ref={ref} onWheel={handleScroll}>
                 <div className="computer-content" style={{ transform: `scale(${sittingScale})` }}>
                     {children}
-                    <div className="computer-hardware">
+                    <div className="computer-hardware" style={{ filter: `brightness(${light})` }}>
                         <div className="computer-box" style={{transform: `scale(${scale})`}}>
-                            <img className="computer-cut-out" src={ComputerCutOut} alt=""/>
-                            <Power/>
-                            <img className={`computer-off-screen ${power ? "on" : "off"}`} src={ComputerOffScreen} alt=""/>
+                            <img
+                              className="computer-cut-out"
+                              src={ComputerCutOut}
+                              alt=""
+                            />
+                            <Power button />
+                            <img
+                              className={`computer-off-screen ${power ? "on" : "off"}`}
+                              src={ComputerOffScreen}
+                              alt=""
+                              style={{ filter: `brightness(${light <= 0.1 ? 0 : light})` }}
+                            />
+                        </div>
+                    </div>
+                    <div className="computer-glow-layer">
+                        <div className="computer-box" style={{transform: `scale(${scale})`}}>
+                            <Power glow />
                         </div>
                     </div>
                 </div>
