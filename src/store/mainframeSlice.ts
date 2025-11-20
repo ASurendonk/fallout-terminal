@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SYSTEMS } from "types";
 import { RootState } from "store";
-import { SoundCode } from "helpers/sounds.ts";
+import { SoundCode } from "helpers/sounds";
 
 interface MainframeState {
   power: boolean;
@@ -98,7 +98,7 @@ export const {
   loadHack,
   setColor,
   setLight,
-} = mainframeSlice.actions
+} = mainframeSlice.actions;
 
 export const getPower = (state: RootState) => state.mainframe.power;
 export const getNotification = (state: RootState) => state.mainframe.notification;

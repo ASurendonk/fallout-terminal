@@ -17,6 +17,8 @@ import { SystemContext } from "components/software/elements/context/context";
 import { Repair } from "components/software/systems/internal/repair";
 import { Maintenance } from "components/software/systems/internal/maintenance";
 import {Lights} from "components/software/systems/internal/maintenance/lights";
+import {Programs} from "components/software/systems/internal/programs";
+import {Ping} from "components/software/systems/internal/programs/ping";
 
 // 20 lines
 // 54 characters
@@ -48,12 +50,14 @@ export const MainFrame = () => {
       case 'login': return <Login />;
       case 'hack': return <Hack />;
       case 'home': return <Home />;
-      case 'map': return <Map />;
       case 'entries': return <Entries />;
       case 'log': return <Log />;
       case 'repair': return <Repair />;
       case 'maintenance': return <Maintenance />;
       case 'lights': return <Lights />;
+      case 'programs': return <Programs />;
+      case 'map': return <Map />;
+      case 'ping': return <Ping />;
       default: return null;
     }
   }, [systemName]);

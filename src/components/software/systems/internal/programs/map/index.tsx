@@ -1,41 +1,30 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React from 'react';
 import './styles.scss';
-import {Button, Line, Title} from 'components/software/elements';
+import { Button, Line, Title } from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
-import { Sequencer } from "components/sequencer";
+import { Sequencer, SequenceGroup } from "components/sequencer";
+import { NetworkMap } from "components/software/games/network/map.tsx";
 
 export const Map = () => {
+  return (
+    <div className="local-map screen">
+      <Title loggedIn/>
 
-    const [index, setIndex] = useState(0);
-    const [skip, setSkip] = useState(false);
+      <Line />
+      {"HOME > PROGRAMS > MAP"}
 
-    const sequencerProps = useMemo(() => ({
-        onComplete: setIndex,
-        index: index,
-        skip: skip,
-    }), [setIndex, index, skip]);
+      <SequenceGroup>
+        <NetworkMap />
 
-    const onScreenClick = useCallback(() => {
-        setSkip(true);
-    }, []);
+        <div className="screen-spacer"/>
 
-    return (
-        <div className="local-map screen" onClick={onScreenClick}>
-            <Title loggedIn/>
-
-            <Line />
-            {"HOME > MAP"}
-
-            <Sequencer art order={0} {...sequencerProps}>{artMap}</Sequencer>
-
-            <div className="screen-spacer"/>
-
-            <Sequencer line order={1} {...sequencerProps}>
-                <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
-            </Sequencer>
-        </div>
-    );
+        <Sequencer line>
+          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+        </Sequencer>
+      </SequenceGroup>
+    </div>
+  );
 }
 
 const artMap = `

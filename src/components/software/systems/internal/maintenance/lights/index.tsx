@@ -5,8 +5,8 @@ import {Button, Line, Title} from 'components/software/elements';
 import { navigate } from 'helpers';
 import { SYSTEMS } from 'types';
 import { Notification } from "components/software/elements/notification";
-import {setLight} from "store/mainframeSlice.ts";
-import {useDispatch} from "hooks/dispatch.ts";
+import {setLight} from "store/mainframeSlice";
+import {useDispatch} from "hooks/dispatch";
 
 export const Lights = () => {
   const dispatch = useDispatch();

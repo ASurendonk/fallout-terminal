@@ -127,3 +127,41 @@ export const Sequencer = ({children, className, line, spacer, smSpacer, onComple
 
     return <>{output}</>;
 };
+
+Sequencer.displayName = 'Sequencer';
+
+interface SequenceGroupProps {
+  children: React.ReactNode;
+  onSkip?: () => void;
+}
+
+export const SequenceGroup = ({ children, onSkip }: SequenceGroupProps) => {
+  const [index, setIndex] = React.useState(0);
+  const [skip, setSkip] = React.useState(false);
+
+  const handleScreenClick = React.useCallback(() => {
+    setSkip(true);
+    onSkip?.();
+  }, [onSkip]);
+
+  let sequencerOrder = 0;
+
+  const childrenWithOrder = React.Children.map(children, (child) => {
+    if (React.isValidElement(child) && (child.type as any)?.displayName === 'Sequencer') {
+      const currentOrder = sequencerOrder++;
+      return React.cloneElement(child as React.ReactElement<any>, {
+        order: currentOrder,
+        index,
+        skip,
+        onComplete: () => setIndex(currentOrder + 1),
+      });
+    }
+    return child;
+  });
+
+  return (
+    <div onClick={handleScreenClick} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      {childrenWithOrder}
+    </div>
+  );
+};

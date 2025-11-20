@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import './styles.scss';
-import { Sequencer } from 'components/sequencer';
+import { Sequencer, SequenceGroup } from 'components/sequencer';
 import {Button, Line, Title} from 'components/software/elements';
 import { navigate } from 'helpers';
 import { SYSTEMS } from 'types';
@@ -29,33 +29,35 @@ export const Home = () => {
       HOME
       <Line />
 
-      <Sequencer art order={0} {...sequencerProps}>{artTitle}</Sequencer>
-      <Line />
+      <SequenceGroup>
+        <Sequencer art>{artTitle}</Sequencer>
+        <Line />
 
-      <Sequencer order={1} {...sequencerProps}>{"Welcome VD#1514"}</Sequencer>
-      <Line />
+        <Sequencer>{"Welcome VD#1514"}</Sequencer>
+        <Line />
 
-      <Sequencer line order={2} msDelay={100} {...sequencerProps}>
-        <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
-      </Sequencer>
+        <Sequencer line msDelay={100}>
+          <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
+        </Sequencer>
 
-      <Sequencer line order={3} msDelay={100} {...sequencerProps}>
-        <Button label="MAP" fullWidth onClick={() => navigate(SYSTEMS.MAP)}/>
-      </Sequencer>
+        <Sequencer line msDelay={100}>
+          <Button label="PROGRAMS" fullWidth onClick={() => navigate(SYSTEMS.PROGRAMS)}/>
+        </Sequencer>
 
-      <Sequencer line order={4} msDelay={100} {...sequencerProps}>
-        <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>
-      </Sequencer>
+        {/*<Sequencer line msDelay={100}>*/}
+        {/*  <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>*/}
+        {/*</Sequencer>*/}
 
-      <Sequencer line order={5} msDelay={100} {...sequencerProps}>
-        <Button label="MAINTENANCE" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
-      </Sequencer>
+        <Sequencer line msDelay={100}>
+          <Button label="MAINTENANCE" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
+        </Sequencer>
 
-      <div className="screen-spacer"/>
+        <div className="screen-spacer"/>
 
-      <Sequencer line order={6} msDelay={100} {...sequencerProps}>
-        <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
-      </Sequencer>
+        <Sequencer line msDelay={100}>
+          <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
+        </Sequencer>
+      </SequenceGroup>
 
       <Notification/>
     </div>
@@ -72,3 +74,15 @@ const artTitle = `
 ░█░█░█▀█░█░█░█░░░░█░░░░▀▀█░▀▀█
 ░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░░░░░▀░░░▀
 `.trimStart();
+
+// access terminal on same floor
+// cant access directly - too far
+// activate relays
+// relays cost power
+// need 2 relays, can only afford one
+// can relay to generator room, increase power
+// now can relay twice to terminal
+// 3 screens:
+// - map: shows terminals and relays as nodes
+// - network search?: finds a list of network nodes (include too far items?)
+// - connection screen: activates nodes
