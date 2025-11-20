@@ -4,23 +4,23 @@ import { Button, Line, Title } from 'components/software/elements';
 import { SYSTEMS } from 'types';
 import { navigate } from 'helpers';
 import { Sequencer, SequenceGroup } from "components/sequencer";
-import { NetworkMap } from "components/software/games/network/map.tsx";
+import { NetworkMap as NMap } from "components/software/games/network/map.tsx";
 
-export const Map = () => {
+export const NetworkMap = () => {
   return (
-    <div className="local-map screen">
+    <div className="network-map screen">
       <Title loggedIn/>
 
       <Line />
-      {"HOME > PROGRAMS > MAP"}
+      {"HOME > PROGRAMS > NETWORK MAP"}
 
       <SequenceGroup>
-        <NetworkMap />
+        <NMap />
 
         <div className="screen-spacer"/>
 
         <Sequencer line>
-          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.PROGRAMS)}/>
         </Sequencer>
       </SequenceGroup>
     </div>

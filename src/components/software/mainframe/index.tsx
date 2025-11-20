@@ -1,9 +1,8 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
-import { Boot } from 'components/software';
+import {Boot, NetworkMap} from 'components/software';
 import { Login } from 'components/software';
 import { Home } from 'components/software';
 import { Bios } from 'components/software';
-import { Map } from 'components/software';
 import { Hack } from 'components/software';
 import  useDebouncedEffect  from  'use-debounced-effect';
 import { Screen } from 'components/software/screen';
@@ -18,7 +17,7 @@ import { Repair } from "components/software/systems/internal/repair";
 import { Maintenance } from "components/software/systems/internal/maintenance";
 import {Lights} from "components/software/systems/internal/maintenance/lights";
 import {Programs} from "components/software/systems/internal/programs";
-import {Ping} from "components/software/systems/internal/programs/ping";
+import {NetworkSearch} from "components/software/systems/internal/programs/networkSearch";
 
 // 20 lines
 // 54 characters
@@ -56,8 +55,8 @@ export const MainFrame = () => {
       case 'maintenance': return <Maintenance />;
       case 'lights': return <Lights />;
       case 'programs': return <Programs />;
-      case 'map': return <Map />;
-      case 'ping': return <Ping />;
+      case 'network_map': return <NetworkMap />;
+      case 'network_search': return <NetworkSearch />;
       default: return null;
     }
   }, [systemName]);

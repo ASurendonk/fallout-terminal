@@ -83,6 +83,6 @@ const artTitle = `
 // can relay to generator room, increase power
 // now can relay twice to terminal
 // 3 screens:
-// - map: shows terminals and relays as nodes
+// - networkMap: shows terminals and relays as nodes
 // - network search?: finds a list of network nodes (include too far items?)
 // - connection screen: activates nodes

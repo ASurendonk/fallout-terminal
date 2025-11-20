@@ -16,7 +16,13 @@ export const networkSlice = createSlice({
   name: "network",
   initialState: initialState,
   reducers: {
+    addNode: (state, action: PayloadAction<NetworkNode>) => {
+      const nodes = { ...state.nodes };
+      nodes[action.payload.id] = action.payload;
+      state.nodes = nodes;
+    },
     powerNode: (state, action: PayloadAction<NetworkNode>) => {
+      // todo: change this function
       const nodes = { ...state.nodes };
       nodes[action.payload.id] = action.payload;
       state.nodes = nodes;
@@ -25,6 +31,7 @@ export const networkSlice = createSlice({
 });
 
 export const {
+  addNode,
   powerNode,
 } = networkSlice.actions;
 

@@ -10,6 +10,6 @@ export enum SYSTEMS {
   MAINTENANCE = 'maintenance',
   LIGHTS = 'lights',
   PROGRAMS = 'programs',
-  MAP = 'map',
-  PING = 'ping',
+  NETWORK_MAP = 'network_map',
+  NETWORK_SEARCH = 'network_search',
 }
