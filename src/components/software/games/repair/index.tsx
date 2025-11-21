@@ -92,7 +92,7 @@ export const RepairGame = () => {
             const hasError = line.some(l => l.isError);
             const indexValue = String(1 + lineIndex).padStart(4, "0");
             return (
-                <Sequencer key={lineIndex} line order={lineIndex} msDelay={100} {...sequencerProps}>
+                <Sequencer key={lineIndex} line order={lineIndex} delay {...sequencerProps}>
                     0x{indexValue} | {output} | <span className={`repair-line-state ${!hasError}`}>{hasError ? "ERROR" : "OK"}</span>
                 </Sequencer>
             );
@@ -105,7 +105,7 @@ export const RepairGame = () => {
             {renderedLines}
 
             <br/>
-            <Sequencer line order={lineCount} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={lineCount} delay {...sequencerProps}>
                 <Button label="SCAN" fullWidth onClick={onScanClick}/>
             </Sequencer>
             <Sequencer line order={lineCount + 1} {...sequencerProps}>{"ERRORS | " + errorValues}</Sequencer>

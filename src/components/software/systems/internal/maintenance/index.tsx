@@ -1,43 +1,43 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React from 'react';
 import './styles.scss';
-import {Sequencer} from 'components/sequencer';
+import {SequenceGroup, Sequencer} from 'components/sequencer';
 import {Button, Line, Title} from 'components/software/elements';
 import {navigate} from 'helpers';
 import {SYSTEMS} from 'types';
 import {Notification} from "components/software/elements/notification";
 
 export const Maintenance = () => {
-
-  const [index, setIndex] = useState(0);
-  const [skip, setSkip] = useState(false);
-
-  const sequencerProps = useMemo(() => ({
-    onComplete: setIndex,
-    index: index,
-    skip: skip,
-  }), [setIndex, index, skip]);
-
-  const onScreenClick = useCallback(() => {
-    setSkip(true);
-  }, []);
-
   return (
-    <div className="maintenance screen" onClick={onScreenClick}>
+    <div className="maintenance screen">
       <Title loggedIn/>
 
       <Line />
       {"HOME > MAINTENANCE"}
       <Line />
 
-      <Sequencer line order={0} msDelay={100} {...sequencerProps}>
-        <Button label="LIGHTS" fullWidth onClick={() => navigate(SYSTEMS.LIGHTS)}/>
-      </Sequencer>
+      <SequenceGroup>
+        <Sequencer line delay>
+          <Button label="NETWORK MAP" fullWidth onClick={() => navigate(SYSTEMS.NETWORK_MAP)}/>
+        </Sequencer>
 
-      <div className="screen-spacer"/>
+        <Sequencer line delay>
+          <Button label="NETWORK SCANNER" fullWidth onClick={() => navigate(SYSTEMS.NETWORK_SEARCH)}/>
+        </Sequencer>
 
-      <Sequencer line order={1} msDelay={100} {...sequencerProps}>
-        <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
-      </Sequencer>
+        <Sequencer line delay>
+          <Button label="POWER DISTRIBUTOR" fullWidth onClick={() => navigate(SYSTEMS.POWER_DISTRIBUTOR)}/>
+        </Sequencer>
+
+        <Sequencer line delay>
+          <Button label="LIGHTS" fullWidth onClick={() => navigate(SYSTEMS.LIGHTS)}/>
+        </Sequencer>
+
+        <div className="screen-spacer"/>
+
+        <Sequencer line delay>
+          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
+        </Sequencer>
+      </SequenceGroup>
 
       <Notification/>
     </div>

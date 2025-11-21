@@ -16,17 +16,13 @@ export const Programs = () => {
       <Line />
 
       <SequenceGroup>
-        <Sequencer line msDelay={100}>
-          <Button label="NETWORK MAP" fullWidth onClick={() => navigate(SYSTEMS.NETWORK_MAP)}/>
-        </Sequencer>
-
-        <Sequencer line msDelay={100}>
-          <Button label="NETWORK SEARCH" fullWidth onClick={() => navigate(SYSTEMS.NETWORK_SEARCH)}/>
+        <Sequencer line delay>
+          <Button label="WORK_IN_PROGRESS" fullWidth onClick={() => null}/>
         </Sequencer>
 
         <div className="screen-spacer"/>
 
-        <Sequencer line msDelay={100}>
+        <Sequencer line delay>
           <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
         </Sequencer>
       </SequenceGroup>

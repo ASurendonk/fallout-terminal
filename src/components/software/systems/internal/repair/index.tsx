@@ -32,7 +32,7 @@ export const Repair = () => {
 
             <div className="screen-spacer"/>
 
-            <Sequencer line order={0} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={0} delay {...sequencerProps}>
                 <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.HOME)}/>
             </Sequencer>
         </div>

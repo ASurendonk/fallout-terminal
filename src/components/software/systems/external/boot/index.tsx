@@ -42,7 +42,7 @@ export const Boot = () => {
             <div className="screen-content">
                 <Sequencer line spacer order={0} {...sequencerProps}>CPU: Ar-Co(R) CPU AC80 @ 2.04MHz</Sequencer>
                 <Sequencer line spacer order={1} {...sequencerProps}>MAINFRAME Ver: 01.00.11</Sequencer>
-                <Sequencer line spacer order={2} msDelay={100} {...sequencerProps}>
+                <Sequencer line spacer order={2} delay {...sequencerProps}>
                     <>
                         {/*<Button label="MAINFRAME" fullWidth onClick={onBiosClick} />*/}
                     </>

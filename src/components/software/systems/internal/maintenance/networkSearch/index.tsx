@@ -56,7 +56,7 @@ export const NetworkSearch = () => {
       <Title loggedIn/>
 
       <Line />
-      {"HOME > PROGRAMS > NETWORK SEARCH"}
+      {"HOME > MAINTENANCE > NETWORK SCANNER"}
       <Line />
 
       <SequenceGroup>
@@ -67,8 +67,8 @@ export const NetworkSearch = () => {
 
         <div className="screen-spacer"/>
 
-        <Sequencer line msDelay={100}>
-          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.PROGRAMS)}/>
+        <Sequencer line delay>
+          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
         </Sequencer>
       </SequenceGroup>
 

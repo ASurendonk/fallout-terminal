@@ -17,7 +17,8 @@ import { Repair } from "components/software/systems/internal/repair";
 import { Maintenance } from "components/software/systems/internal/maintenance";
 import {Lights} from "components/software/systems/internal/maintenance/lights";
 import {Programs} from "components/software/systems/internal/programs";
-import {NetworkSearch} from "components/software/systems/internal/programs/networkSearch";
+import {NetworkSearch} from "components/software/systems/internal/maintenance/networkSearch";
+import {PowerDistributor} from "components/software/systems/internal/maintenance/powerDistributor";
 
 // 20 lines
 // 54 characters
@@ -57,6 +58,7 @@ export const MainFrame = () => {
       case 'programs': return <Programs />;
       case 'network_map': return <NetworkMap />;
       case 'network_search': return <NetworkSearch />;
+      case 'power_distributor': return <PowerDistributor />;
       default: return null;
     }
   }, [systemName]);

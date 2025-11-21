@@ -71,14 +71,14 @@ export const Login = () => {
                 <Sequencer line smSpacer order={2} {...sequencerProps}>
                     <PasswordInput value={password} onTextChange={onPasswordChange} />
                 </Sequencer>
-                <Sequencer line order={2} msDelay={100} {...sequencerProps}>
+                <Sequencer line order={2} delay {...sequencerProps}>
                     <Button label="LOGIN" fullWidth onClick={() => attemptLogin()}/>
                 </Sequencer>
                 <br/>
-                <Sequencer line order={3} msDelay={100} {...sequencerProps}>
+                <Sequencer line order={3} delay {...sequencerProps}>
                     <Button label="INFORMATION" fullWidth onClick={() => navigate(SYSTEMS.BIOS)}/>
                 </Sequencer>
-                <Sequencer line order={4} msDelay={100} {...sequencerProps}>
+                <Sequencer line order={4} delay {...sequencerProps}>
                     {hackLoaded ? (
                         <Button label="/HACK/" fullWidth onClick={() => navigate(SYSTEMS.HACK)}/>
                     ) : ""}

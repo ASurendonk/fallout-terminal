@@ -12,7 +12,7 @@ export const NetworkMap = () => {
       <Title loggedIn/>
 
       <Line />
-      {"HOME > PROGRAMS > NETWORK MAP"}
+      {"HOME > MAINTENANCE > NETWORK MAP"}
 
       <SequenceGroup>
         <NMap />
@@ -20,7 +20,7 @@ export const NetworkMap = () => {
         <div className="screen-spacer"/>
 
         <Sequencer line>
-          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.PROGRAMS)}/>
+          <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
         </Sequencer>
       </SequenceGroup>
     </div>

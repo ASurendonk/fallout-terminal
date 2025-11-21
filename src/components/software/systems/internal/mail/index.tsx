@@ -41,11 +41,11 @@ export const Entries = () => {
             {"HOME > LOGS"}
             <Line />
 
-            <Sequencer line order={0} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={0} delay {...sequencerProps}>
                 <Button label="SECURITY WARNING" fullWidth onClick={onClickLog}/>
             </Sequencer>
 
-            <Sequencer line order={1} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={1} delay {...sequencerProps}>
                 <Button label="Join Today" fullWidth onClick={onClickLog2}/>
             </Sequencer>
 

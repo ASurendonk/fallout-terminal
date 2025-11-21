@@ -12,4 +12,5 @@ export enum SYSTEMS {
   PROGRAMS = 'programs',
   NETWORK_MAP = 'network_map',
   NETWORK_SEARCH = 'network_search',
+  POWER_DISTRIBUTOR = 'power_distributor',
 }

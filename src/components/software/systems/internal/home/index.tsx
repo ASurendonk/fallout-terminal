@@ -36,25 +36,25 @@ export const Home = () => {
         <Sequencer>{"Welcome VD#1514"}</Sequencer>
         <Line />
 
-        <Sequencer line msDelay={100}>
+        <Sequencer line delay>
           <Button label="LOGS" fullWidth onClick={() => navigate(SYSTEMS.ENTRIES)}/>
         </Sequencer>
 
-        <Sequencer line msDelay={100}>
+        <Sequencer line delay>
           <Button label="PROGRAMS" fullWidth onClick={() => navigate(SYSTEMS.PROGRAMS)}/>
         </Sequencer>
 
-        {/*<Sequencer line msDelay={100}>*/}
+        {/*<Sequencer line delay>*/}
         {/*  <Button label="REPAIR" fullWidth onClick={() => navigate(SYSTEMS.REPAIR)}/>*/}
         {/*</Sequencer>*/}
 
-        <Sequencer line msDelay={100}>
+        <Sequencer line delay>
           <Button label="MAINTENANCE" fullWidth onClick={() => navigate(SYSTEMS.MAINTENANCE)}/>
         </Sequencer>
 
         <div className="screen-spacer"/>
 
-        <Sequencer line msDelay={100}>
+        <Sequencer line delay>
           <Button label="LOGOUT" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
         </Sequencer>
       </SequenceGroup>

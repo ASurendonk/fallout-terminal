@@ -71,28 +71,28 @@ export const Bios = () => {
             <Line />
 
             <Sequencer line order={3} {...sequencerProps}>Drives:</Sequencer>
-            <Sequencer line order={4} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={4} delay {...sequencerProps}>
                 <Button label="MAIN" fullWidth onClick={() => dispatch(notify("MAIN Already Loaded..."))} />
             </Sequencer>
-            <Sequencer line order={5} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={5} delay {...sequencerProps}>
                 <Button label="/HACK/ (UNKNOWN)" fullWidth onClick={onHashClick} />
             </Sequencer>
             <Line />
 
             <Sequencer line order={6} {...sequencerProps}>Color:</Sequencer>
-            <Sequencer line order={7} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={7} delay {...sequencerProps}>
                 <Slider label="RED" value={localColor.red} onValueChange={onColorChange("red")} />
             </Sequencer>
-            <Sequencer line order={8} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={8} delay {...sequencerProps}>
                 <Slider label="GREEN" value={localColor.green} onValueChange={onColorChange("green")} />
             </Sequencer>
-            <Sequencer line order={9} msDelay={100} {...sequencerProps}>
+            <Sequencer line order={9} delay {...sequencerProps}>
                 <Slider label="BLUE" value={localColor.blue} onValueChange={onColorChange("blue")} />
             </Sequencer>
 
             <div className="screen-spacer"/>
 
-            <Sequencer line order={10} msDelay={100} {...sequencerProps} onComplete={onScreenClick}>
+            <Sequencer line order={10} delay {...sequencerProps} onComplete={onScreenClick}>
                 <Button label="BACK" fullWidth onClick={() => navigate(SYSTEMS.LOGIN)}/>
             </Sequencer>
 

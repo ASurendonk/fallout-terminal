@@ -5,27 +5,21 @@ import {Button, Line, Title} from 'components/software/elements';
 import { navigate } from 'helpers';
 import { SYSTEMS } from 'types';
 import { Notification } from "components/software/elements/notification";
-import {setLight} from "store/mainframeSlice";
-import {useDispatch} from "hooks/dispatch";
+import {useDispatch} from "hooks/dispatch.ts";
 
-export const Lights = () => {
+export const PowerDistributor = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="lights screen">
+    <div className="power-distributor screen">
       <Title loggedIn/>
 
       <Line />
-      {"HOME > MAINTENANCE > LIGHTS"}
+      {"HOME > MAINTENANCE > POWER DISTRIBUTOR"}
       <Line />
 
       <SequenceGroup>
-        <Sequencer line delay>
-          <Button label="ON" fullWidth onClick={() => dispatch(setLight(0.8))}/>
-        </Sequencer>
-        <Sequencer line delay>
-          <Button label="OFF" fullWidth onClick={() => dispatch(setLight(0.1))}/>
-        </Sequencer>
+        Test
 
         <div className="screen-spacer"/>
 

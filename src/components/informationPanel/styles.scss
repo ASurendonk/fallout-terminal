@@ -1,0 +1,78 @@
+@import "../../App";
+
+$ns: information-panel;
+
+.#{$ns}-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  font-family: $share-tech;
+  color: $color-highlight;
+  font-size: 20px;
+  pointer-events: none;
+  background-color: rgba(26, 26, 26, 0);
+  transition: background-color 200ms;
+  &.open {
+    pointer-events: all;
+    background-color: rgba(26, 26, 26, 0.43);
+  }
+
+  .#{$ns}-button {
+    pointer-events: all;
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    border: 2px solid $color-highlight;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+
+  .#{$ns} {
+    pointer-events: all;
+    position: absolute;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    @media (max-width: 1300px) {
+      right: -50%;
+      width: 50%;
+    }
+    @media (max-width: 600px) {
+      right: -100%;
+      width: 100%;
+    }
+    height: 100%;
+    background-color: black;
+    transition: right 200ms ease-in-out;
+    &.open {
+      right: 0;
+    }
+
+    .#{$ns}-content {
+      padding: 20px 20px;
+      z-index: 9;
+      height: 100%;
+
+      .#{$ns}-title {
+        padding-right: 60px;
+      }
+
+      .#{$ns}-tooltip {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: black;
+        padding: 20px;
+      }
+    }
+  }
+}
